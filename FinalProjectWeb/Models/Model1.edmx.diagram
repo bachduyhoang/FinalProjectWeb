@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3819a111ef3c420d87f4328fd11513ca" Name="Diagram1">
+        <EntityTypeShape EntityType="ProjectTGDDModel.ActivityLog" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectTGDDModel.Brand" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectTGDDModel.Discount" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectTGDDModel.OrderDetail" Width="1.5" PointX="10.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectTGDDModel.Order" Width="1.5" PointX="8.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectTGDDModel.Product" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectTGDDModel.Role" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectTGDDModel.sysdiagram" Width="1.5" PointX="5.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectTGDDModel.User" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="ProjectTGDDModel.FK_ActivityLogs_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectTGDDModel.FK_ActivityLogs_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectTGDDModel.FK__Products__brandI__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectTGDDModel.FK__Orders__discount__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectTGDDModel.FK__OrderDeta__order__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectTGDDModel.FK__OrderDeta__produ__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectTGDDModel.FK__Orders__userID__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectTGDDModel.FK__Users__roleID__4AB81AF0" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

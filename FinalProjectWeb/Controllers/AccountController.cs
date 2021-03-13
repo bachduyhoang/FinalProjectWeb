@@ -22,7 +22,7 @@ namespace FinalProjectWeb.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +34,9 @@ namespace FinalProjectWeb.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -120,7 +120,7 @@ namespace FinalProjectWeb.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -139,7 +139,8 @@ namespace FinalProjectWeb.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            User userModel = new User();
+            return View(userModel);
         }
 
         //
@@ -155,8 +156,8 @@ namespace FinalProjectWeb.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -323,28 +324,23 @@ namespace FinalProjectWeb.Controllers
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
-            if (loginInfo == null)
-            {
-                return RedirectToAction("Login");
-            }
 
-            // Sign in the user with this external login provider if the user already has a login
-            var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
-            switch (result)
+            ProjectTGDD dbmodel = new ProjectTGDD();
+            var userDetails = dbmodel.Users.Where(x => x.userID == loginInfo.Email).FirstOrDefault();
+
+
+            if (userDetails != null)
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
-                case SignInStatus.Failure:
-                default:
-                    // If the user does not have an account, then prompt the user to create an account
-                    ViewBag.ReturnUrl = returnUrl;
-                    ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                return RedirectToAction("Index", "Home");
             }
+            else
+            {
+                ViewBag.ReturnUrl = returnUrl;
+                ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
+                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+
+            }
+            
         }
 
         //
@@ -352,11 +348,31 @@ namespace FinalProjectWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
+        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl, User userModel)
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Manage");
+                //THÊM THÔNG TIN VÀO DATABASE//
+                using (ProjectTGDD dbmodel = new ProjectTGDD())
+                {
+                    String name = model.Email;
+                    string[] arrListStr = name.Split('@');
+
+
+                    var userDetails = dbmodel.Users.Where(x => x.userID == model.Email).FirstOrDefault();
+                    if (userDetails == null)
+                    {
+                        userModel.userID = model.Email;
+                        userModel.fullName = arrListStr[0];
+                        userModel.roleID = "us";
+                        userModel.status = true;
+                        userModel.dateCreated = DateTime.Now;
+                        dbmodel.Users.Add(userModel);
+                        dbmodel.SaveChanges();
+                    }
+
+                }
+                return RedirectToAction("Index", "Home");
             }
 
             if (ModelState.IsValid)
