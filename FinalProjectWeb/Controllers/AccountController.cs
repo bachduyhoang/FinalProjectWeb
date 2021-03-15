@@ -66,29 +66,26 @@ namespace FinalProjectWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginViewModel model, string returnUrl)
         {
+            ProjectTGDD dbmodel = new ProjectTGDD();
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            try
             {
-                case SignInStatus.Success:
+                var user = dbmodel.Users.Where(x => x.userID == model.UserID && x.password == model.Password).Single();
+                if (user != null)
+                {
                     return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                }
             }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Invalid login attempt.");
+            }
+            return View(model);
         }
 
         //
@@ -348,7 +345,7 @@ namespace FinalProjectWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl, User userModel)
+        public ActionResult ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl, User userModel)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -371,34 +368,11 @@ namespace FinalProjectWeb.Controllers
                         dbmodel.SaveChanges();
                     }
 
-                }
-                return RedirectToAction("Index", "Home");
-            }
+                    Session.Add("USERID", model.Email);
 
-            if (ModelState.IsValid)
-            {
-                // Get the information about the user from the external login provider
-                var info = await AuthenticationManager.GetExternalLoginInfoAsync();
-                if (info == null)
-                {
-                    return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user);
-                if (result.Succeeded)
-                {
-                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
-                    if (result.Succeeded)
-                    {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToLocal(returnUrl);
-                    }
-                }
-                AddErrors(result);
             }
-
-            ViewBag.ReturnUrl = returnUrl;
-            return View(model);
+            return RedirectToAction("Index", "Home");
         }
 
         //

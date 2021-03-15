@@ -60,8 +60,8 @@ namespace FinalProjectWeb
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "532789425865-oq9q4b6udjpmacpfv1deu1igvj8mft0k.apps.googleusercontent.com",
-                ClientSecret = "AD3UL02F8U5S6LtEKJouqKuP"
+                ClientId = "1094891742795-scmdeqg4vobr9cebg3r0hfuetqs19qan.apps.googleusercontent.com",
+                ClientSecret = "uEI7TIRIyF6SD6FIjkYET9XR"
             });
         }
     }
