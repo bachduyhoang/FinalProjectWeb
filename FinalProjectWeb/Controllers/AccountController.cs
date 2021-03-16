@@ -84,9 +84,10 @@ namespace FinalProjectWeb.Controllers
             }
             try
             {
-                var user = dbmodel.Users.Where(x => x.userID == model.UserID && x.password == model.Password).Single();
-                if (user != null && status)
+                var user = dbmodel.Users.Where(x => x.userID == model.UserID && x.password == model.Password && x.status == true).Single();
+                if (user != null || status)
                 {
+                    ModelState.AddModelError("", "Invalid recaptcha!");
                     return RedirectToLocal(returnUrl);
                 }
             }
