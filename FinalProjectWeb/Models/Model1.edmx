@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ProjectTGDDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ProjectTGDDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ActivityLogs">
           <Key>
             <PropertyRef Name="activityLogID" />
@@ -88,6 +88,7 @@
           </Key>
           <Property Name="userID" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="fullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
           <Property Name="password" Type="varchar" MaxLength="50" />
           <Property Name="status" Type="bit" />
           <Property Name="dateCreated" Type="datetime" />
@@ -232,8 +233,7 @@
             <End Role="ActivityLogs" EntitySet="ActivityLogs" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProjectTGDDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -340,6 +340,7 @@
           <NavigationProperty Name="ActivityLogs" Relationship="Self.FK_ActivityLogs_Users" FromRole="Users" ToRole="ActivityLogs" />
           <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__userID__48CFD27E" FromRole="Users" ToRole="Orders" />
           <NavigationProperty Name="Role" Relationship="Self.FK__Users__roleID__4AB81AF0" FromRole="Users" ToRole="Roles" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_ActivityLogs_Products">
           <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
@@ -574,6 +575,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="ProjectTGDDModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="userID" ColumnName="userID" />
                 <ScalarProperty Name="fullName" ColumnName="fullName" />
                 <ScalarProperty Name="password" ColumnName="password" />
