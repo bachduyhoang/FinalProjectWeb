@@ -1,0 +1,64 @@
+﻿@model DAL.EF.Discount
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit", "Discount", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Discount</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.discountID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.discountPercent, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.discountPercent, new { @class = "form-control" , @Min="1", @Max="100"})
+                @Html.ValidationMessageFor(model => model.discountPercent, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.dayCreated, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.dayCreated, new { @class = "form-control" , @ReadOnly="true"})
+                @Html.ValidationMessageFor(model => model.dayCreated, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.expiry, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.expiry
+                @Html.TextBoxFor(model => model.expiry, new { @class = "form-control", @Type = "date", @Id = "datefield", @Min = "" })
+                @Html.ValidationMessageFor(model => model.expiry, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    if (dd < 10)
+        dd = '0' + dd;
+    if (mm < 10)
+        mm = '0' + mm;
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("datefield").setAttribute("min", today);
+</script>

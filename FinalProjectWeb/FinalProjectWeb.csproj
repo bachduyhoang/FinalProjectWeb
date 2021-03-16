@@ -168,6 +168,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\DiscountController.cs" />
+    <Compile Include="Areas\Admin\Models\DiscountModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -421,6 +423,9 @@
     <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="bin\BLL.dll.config" />
     <Content Include="bin\DAL.dll.config" />
+    <Content Include="Areas\Admin\Views\Discount\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Discount\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Discount\Edit.cshtml" />
     <None Include="bin\FinalProjectWeb.dll.config" />
     <Content Include="bin\roslyn\csc.exe.config" />
     <Content Include="bin\roslyn\csc.rsp" />
@@ -480,7 +485,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>

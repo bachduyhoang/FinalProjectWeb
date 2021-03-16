@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model FinalProjectWeb.Areas.Admin.Models.DiscountModel
+
+@using (Html.BeginForm("Index", "Discount", FormMethod.Post))
+{
+    @Html.TextBoxFor(model => model.searchWord, new { @Class = "form-control", @PlaceHolder = "Search" })
+    @Html.TextBoxFor(model => model.currentPage, new { @Value = 1, @Type = "hidden", @Style = "margin-bottom:5%;" })
+    <button class="btn btn-success" type="submit">Search</button>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>DiscountID</td>
+            <td>DiscountPercent</td>
+            <td>DayCreated</td>
+            <td>Expiry</td>
+            <td>Update</td>
+            <td>Delete</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.list)
+        {
+            <tr>
+                <td>@item.discountID</td>
+                <td>@item.discountPercent</td>
+                <td>@item.dayCreated</td>
+                <td>@item.expiry</td>
+                <td>
+                    @using (Html.BeginForm("Delete", "Discount", FormMethod.Post))
+                    {
+                        @Html.TextBoxFor(model => model.searchWord, new { @Type = "hidden" })
+                        @Html.TextBoxFor(model => model.currentPage, new { @Value = 1, @Type = "hidden" })
+                        @Html.TextBoxFor(model => model.discountID, new { @Type = "hidden", @Value = item.discountID })
+                        <button class="btn btn-success" type="submit" onclick="confirm('Are your sure?')">Delete</button>
+                    }
+                </td>
+                <td>
+                    @using (Html.BeginForm("Edit", "Discount", FormMethod.Get))
+                    {
+                        @Html.TextBoxFor(model => model.discountID, new { @Type = "hidden", @Value = item.discountID })
+                        <button class="btn btn-success" type="submit" >Edit</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="media" style="float:left;">
+    @using (Html.BeginForm("Index", "Discount", FormMethod.Post))
+    {
+        @Html.TextBoxFor(model => model.searchWord, new { @Type = "hidden" })
+        @Html.TextBoxFor(model => model.currentPage, new { @Value = 1, @Type = "hidden" })
+        <button class="btn btn-success" type="submit">First</button>
+    }
+</div>
+<div class="media" style="float:left;">
+    @using (Html.BeginForm("Index", "Discount", FormMethod.Post))
+    {
+        @Html.TextBoxFor(model => model.searchWord, new { @Type = "hidden" })
+        @Html.TextBoxFor(model => model.currentPage, new { @Value = Model.currentPage - 1, @Type = "hidden" })
+        <button class="btn btn-success" type="submit">Previous</button>
+    }
+</div>
+@for (var i = 1; i <= Model.totalPage; i++)
+{
+    <div class="media" style="float:left;">
+        @using (Html.BeginForm("Index", "Discount", FormMethod.Post))
+        {
+            @Html.TextBoxFor(model => model.searchWord, new { @Type = "hidden" })
+            @Html.TextBoxFor(model => model.currentPage, new { @Value = i, @Type = "hidden" })
+            <button class="btn btn-success" type="submit">@i</button>
+        }
+    </div>
+}
+
+<div class="media" style="float:left;">
+    @using (Html.BeginForm("Index", "Discount", FormMethod.Post))
+    {
+        @Html.TextBoxFor(model => model.searchWord, new { @Type = "hidden" })
+        @Html.TextBoxFor(model => model.currentPage, new { @Value = Model.currentPage+1, @Type = "hidden" })
+        <button class="btn btn-success" type="submit">Next</button>
+    }
+</div>
+
+<div class="media" style="float:left;">
+    @using (Html.BeginForm("Index", "Discount", FormMethod.Post))
+    {
+        @Html.TextBoxFor(model => model.searchWord, new { @Type = "hidden" })
+        @Html.TextBoxFor(model => model.currentPage, new { @Value = Model.totalPage, @Type = "hidden" })
+        <button class="btn btn-success" type="submit">Last</button>
+    }
+</div>
