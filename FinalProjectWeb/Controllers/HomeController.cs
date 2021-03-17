@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BLL;
+using DAL.EF;
+using FinalProjectWeb.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +13,9 @@ namespace FinalProjectWeb.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            ProductBLL product = new ProductBLL();
+            List<Product> p = product.GetListNew();
+            return View(p);
         }
 
         public ActionResult About()
@@ -25,6 +30,33 @@ namespace FinalProjectWeb.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        [ChildActionOnly]
+        public ActionResult Brand()
+        {
+            ProductBLL product = new ProductBLL();
+            var p = product.GetListBrand();
+            return View(p);
+        }
+        [ChildActionOnly]
+        public ActionResult Slide()
+        {
+            ProductBLL product = new ProductBLL();
+            List<Product> p = product.GetListNew();
+            return View(p);
+        }
+
+        [ChildActionOnly]
+        public PartialViewResult HeaderCart()
+        {
+            var cart = Session["CartSession"];
+            var list = new List<CartModels>();
+            if (cart != null)
+            {
+                list = (List<CartModels>)cart;
+            }
+            return PartialView(list);
         }
     }
 }

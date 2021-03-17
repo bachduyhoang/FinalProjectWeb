@@ -1,0 +1,13 @@
+﻿@model List<DAL.EF.Brand>
+
+
+<div class="categories">
+    <ul>
+        <h3>Brand</h3>
+        @foreach (var item in Model)
+        {
+            <li><a href="/product/@item.brandName">@item.brandName</a></li>
+        }
+    </ul>
+</div>
+

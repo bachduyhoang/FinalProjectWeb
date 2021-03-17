@@ -1,8 +1,18 @@
-﻿
+﻿@model List<DAL.EF.Product>
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
-<h2>Index</h2>
+
+<div class="header_slide">
+    <div class="header_bottom_left">
+        @{Html.RenderAction("Brand", "Home");} 
+    </div>
+    <div class="header_bottom_right">
+        @{Html.RenderAction("Slide", "Home");}
+    </div>
+    <div class="clear"></div>
+</div>
 

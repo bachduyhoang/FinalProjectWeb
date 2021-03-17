@@ -1,0 +1,128 @@
+﻿@model DAL.EF.Product
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="main">
+    <div class="content">
+        <div class="content_top">
+            <div class="back-links">
+                <p><a href="index.html">Home</a> >>>> <a href="#">Electronics</a></p>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="section group">
+            <div class="cont-desc span_1_of_2">
+                <div class="product-details">
+                    <div class="grid images_3_of_2">
+                        <div id="container">
+                            <div id="products_example">
+                                <div id="products">
+                                    <div class="slides_container">
+                                        <a href="#" target="_blank"><img src="@Model.imageLink" alt=" " /></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="desc span_3_of_2">
+                        <h2>@Model.productName </h2>
+                        <p>@Model.description</p>
+                        <div class="price">
+                            <p>Price: <span>$@Model.price</span></p>
+                        </div>
+                        <div class="available">
+                            <p>Available Options :</p>
+                            <ul>
+                                <li>
+                                    Color:
+                                    <select>
+                                        <option>Silver</option>
+                                        <option>Black</option>
+                                        <option>Dark Black</option>
+                                        <option>Red</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    Size:<select>
+                                        <option>Large</option>
+                                        <option>Medium</option>
+                                        <option>small</option>
+                                        <option>Large</option>
+                                        <option>small</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    Quality:<select>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="share-desc">
+                            <div class="button"><span><a href="/add-to-cart?i=@Model.productID&q=1">Add to Cart</a></span></div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+
+                <div class="content_bottom">
+                    <div class="heading">
+                        <h3>Related Products</h3>
+                    </div>
+                    <div class="see">
+                        <p><a href="#">See all Products</a></p>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="section group">
+                    <div class="grid_1_of_4 images_1_of_4">
+                        <a href="#"><img src="images/new-pic1.jpg" alt=""></a>
+                        <div class="price" style="border:none">
+                            <div class="add-cart" style="float:none">
+                                <h4><a href="#">Add to Cart</a></h4>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="grid_1_of_4 images_1_of_4">
+                        <a href="#"><img src="images/new-pic2.jpg" alt=""></a>
+                        <div class="price" style="border:none">
+                            <div class="add-cart" style="float:none">
+                                <h4><a href="#">Add to Cart</a></h4>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="grid_1_of_4 images_1_of_4">
+                        <a href="#"><img src="images/new-pic4.jpg" alt=""></a>
+                        <div class="price" style="border:none">
+                            <div class="add-cart" style="float:none">
+                                <h4><a href="#">Add to Cart</a></h4>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="grid_1_of_4 images_1_of_4">
+                        <img src="images/new-pic3.jpg" alt="">
+                        <div class="price" style="border:none">
+                            <div class="add-cart" style="float:none">
+                                <h4><a href="#">Add to Cart</a></h4>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @{Html.RenderAction("ListBrand", "Product");}
+        </div>
+    </div>
+</div>
+
