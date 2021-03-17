@@ -23,11 +23,11 @@ namespace FinalProjectWeb.Models
     
         public string userID { get; set; }
         public string fullName { get; set; }
+        public string email { get; set; }
         public string password { get; set; }
         public Nullable<bool> status { get; set; }
         public Nullable<System.DateTime> dateCreated { get; set; }
         public string roleID { get; set; }
-        public string email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActivityLog> ActivityLogs { get; set; }

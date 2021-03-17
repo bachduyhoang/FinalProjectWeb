@@ -169,93 +169,214 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActivityLog.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ProjectTGDD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Brand.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ProjectTGDD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Discount.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ProjectTGDD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ProjectTGDD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderDetail.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ProjectTGDD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ProjectTGDD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectTGDD.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectTGDD.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectTGDD.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectTGDD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectTGDD.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectTGDD.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Role.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ProjectTGDD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ProjectTGDD.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Asserts\Admin\css\bootstrap.css" />
+    <Content Include="Asserts\Admin\css\bootstrap.min.css" />
+    <Content Include="Asserts\Admin\css\plugins\dataTables\dataTables.bootstrap.css" />
+    <Content Include="Asserts\Admin\css\plugins\morris\morris-0.4.3.min.css" />
+    <Content Include="Asserts\Admin\css\plugins\social-buttons\social-buttons.css" />
+    <Content Include="Asserts\Admin\css\plugins\timeline\timeline.css" />
+    <Content Include="Asserts\Admin\css\sb-admin.css" />
+    <Content Include="Asserts\Admin\font-awesome\css\font-awesome.css" />
+    <Content Include="Asserts\Admin\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Asserts\Admin\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Asserts\Admin\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Asserts\Admin\js\bootstrap.js" />
+    <Content Include="Asserts\Admin\js\bootstrap.min.js" />
+    <Content Include="Asserts\Admin\js\demo\dashboard-demo.js" />
+    <Content Include="Asserts\Admin\js\demo\flot-demo.js" />
+    <Content Include="Asserts\Admin\js\demo\morris-demo.js" />
+    <Content Include="Asserts\Admin\js\jquery-1.10.2.js" />
+    <Content Include="Asserts\Admin\js\plugins\dataTables\dataTables.bootstrap.js" />
+    <Content Include="Asserts\Admin\js\plugins\dataTables\jquery.dataTables.js" />
+    <Content Include="Asserts\Admin\js\plugins\flot\excanvas.min.js" />
+    <Content Include="Asserts\Admin\js\plugins\flot\jquery.flot.js" />
+    <Content Include="Asserts\Admin\js\plugins\flot\jquery.flot.pie.js" />
+    <Content Include="Asserts\Admin\js\plugins\flot\jquery.flot.resize.js" />
+    <Content Include="Asserts\Admin\js\plugins\flot\jquery.flot.tooltip.min.js" />
+    <Content Include="Asserts\Admin\js\plugins\metisMenu\jquery.metisMenu.js" />
+    <Content Include="Asserts\Admin\js\plugins\morris\morris.js" />
+    <Content Include="Asserts\Admin\js\plugins\morris\raphael-2.1.0.min.js" />
+    <Content Include="Asserts\Admin\js\sb-admin.js" />
+    <Content Include="Asserts\User\css\easy-responsive-tabs.css" />
+    <Content Include="Asserts\User\css\global.css" />
+    <Content Include="Asserts\User\css\slider.css" />
+    <Content Include="Asserts\User\css\style.css" />
+    <Content Include="Asserts\User\images\about_img.jpg" />
+    <Content Include="Asserts\User\images\arrow-next.png" />
+    <Content Include="Asserts\User\images\arrow-prev.png" />
+    <Content Include="Asserts\User\images\arrow_up.png" />
+    <Content Include="Asserts\User\images\compare.png" />
+    <Content Include="Asserts\User\images\delivery-img1.jpg" />
+    <Content Include="Asserts\User\images\delivery-img2.jpg" />
+    <Content Include="Asserts\User\images\delivery-img3.jpg" />
+    <Content Include="Asserts\User\images\dribbble.png" />
+    <Content Include="Asserts\User\images\drop_arrow-hover.png" />
+    <Content Include="Asserts\User\images\drop_arrow.png" />
+    <Content Include="Asserts\User\images\facebook.png" />
+    <Content Include="Asserts\User\images\feature-pic1.jpg" />
+    <Content Include="Asserts\User\images\feature-pic2.jpg" />
+    <Content Include="Asserts\User\images\feature-pic3.jpg" />
+    <Content Include="Asserts\User\images\feature-pic4.jpg" />
+    <Content Include="Asserts\User\images\linkedin.png" />
+    <Content Include="Asserts\User\images\list-img.png" />
+    <Content Include="Asserts\User\images\logo.png" />
+    <Content Include="Asserts\User\images\new-pic1.jpg" />
+    <Content Include="Asserts\User\images\new-pic2.jpg" />
+    <Content Include="Asserts\User\images\new-pic3.jpg" />
+    <Content Include="Asserts\User\images\new-pic4.jpg" />
+    <Content Include="Asserts\User\images\newsimg1.jpg" />
+    <Content Include="Asserts\User\images\newsimg2.jpg" />
+    <Content Include="Asserts\User\images\newsimg3.jpg" />
+    <Content Include="Asserts\User\images\preview.jpg" />
+    <Content Include="Asserts\User\images\price-rating.png" />
+    <Content Include="Asserts\User\images\productslide-1.jpg" />
+    <Content Include="Asserts\User\images\productslide-2.jpg" />
+    <Content Include="Asserts\User\images\productslide-3.jpg" />
+    <Content Include="Asserts\User\images\productslide-4.jpg" />
+    <Content Include="Asserts\User\images\productslide-5.jpg" />
+    <Content Include="Asserts\User\images\productslide-6.jpg" />
+    <Content Include="Asserts\User\images\quality-rating.png" />
+    <Content Include="Asserts\User\images\search.png" />
+    <Content Include="Asserts\User\images\skype.png" />
+    <Content Include="Asserts\User\images\slide-1-image.png" />
+    <Content Include="Asserts\User\images\slide-2-image.jpg" />
+    <Content Include="Asserts\User\images\slide-3-image.jpg" />
+    <Content Include="Asserts\User\images\tag.png" />
+    <Content Include="Asserts\User\images\thumbnailslide-1.jpg" />
+    <Content Include="Asserts\User\images\thumbnailslide-2.jpg" />
+    <Content Include="Asserts\User\images\thumbnailslide-3.jpg" />
+    <Content Include="Asserts\User\images\thumbnailslide-4.jpg" />
+    <Content Include="Asserts\User\images\thumbnailslide-5.jpg" />
+    <Content Include="Asserts\User\images\thumbnailslide-6.jpg" />
+    <Content Include="Asserts\User\images\twitter.png" />
+    <Content Include="Asserts\User\images\value-rating.png" />
+    <Content Include="Asserts\User\images\wishlist.png" />
+    <Content Include="Asserts\User\js\easing.js" />
+    <Content Include="Asserts\User\js\easyResponsiveTabs.js" />
+    <Content Include="Asserts\User\js\jquery-1.7.2.min.js" />
+    <Content Include="Asserts\User\js\jquery.accordion.js" />
+    <Content Include="Asserts\User\js\jquery.easing.js" />
+    <Content Include="Asserts\User\js\move-top.js" />
+    <Content Include="Asserts\User\js\script.js" />
+    <Content Include="Asserts\User\js\slides.min.jquery.js" />
+    <Content Include="Asserts\User\js\startstop-slider.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\UserStyle\css\slider.css" />
-    <Content Include="Content\UserStyle\css\style.css" />
-    <Content Include="Content\UserStyle\images\logo.png" />
-    <Content Include="Content\UserStyle\js\easing.js" />
-    <Content Include="Content\UserStyle\js\jquery-1.7.2.min.js" />
-    <Content Include="Content\UserStyle\js\move-top.js" />
-    <Content Include="Content\UserStyle\js\startstop-slider.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Model1.Context.tt">
+    <Content Include="Models\ProjectTGDD.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>ProjectTGDD.edmx</DependentUpon>
+      <LastGenOutput>ProjectTGDD.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Model1.tt">
+    <Content Include="Models\ProjectTGDD.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
+      <DependentUpon>ProjectTGDD.edmx</DependentUpon>
+      <LastGenOutput>ProjectTGDD.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\Model1.edmx">
+    <EntityDeploy Include="Models\ProjectTGDD.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+      <LastGenOutput>ProjectTGDD.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
+    <Content Include="Models\ProjectTGDD.edmx.diagram">
+      <DependentUpon>ProjectTGDD.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Asserts\Admin\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Asserts\Admin\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Asserts\Admin\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Asserts\Admin\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Asserts\Admin\font-awesome\less\bordered-pulled.less" />
+    <Content Include="Asserts\Admin\font-awesome\less\core.less" />
+    <Content Include="Asserts\Admin\font-awesome\less\fixed-width.less" />
+    <Content Include="Asserts\Admin\font-awesome\less\font-awesome.less" />
+    <Content Include="Asserts\Admin\font-awesome\less\icons.less" />
+    <Content Include="Asserts\Admin\font-awesome\less\larger.less" />
+    <Content Include="Asserts\Admin\font-awesome\less\list.less" />
+    <Content Include="Asserts\Admin\font-awesome\less\mixins.less" />
+    <Content Include="Asserts\Admin\font-awesome\less\path.less" />
+    <Content Include="Asserts\Admin\font-awesome\less\rotated-flipped.less" />
+    <Content Include="Asserts\Admin\font-awesome\less\spinning.less" />
+    <Content Include="Asserts\Admin\font-awesome\less\stacked.less" />
+    <Content Include="Asserts\Admin\font-awesome\less\variables.less" />
+    <Content Include="Asserts\Admin\font-awesome\scss\font-awesome.scss" />
+    <Content Include="Asserts\Admin\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="Asserts\Admin\font-awesome\scss\_core.scss" />
+    <Content Include="Asserts\Admin\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="Asserts\Admin\font-awesome\scss\_icons.scss" />
+    <Content Include="Asserts\Admin\font-awesome\scss\_larger.scss" />
+    <Content Include="Asserts\Admin\font-awesome\scss\_list.scss" />
+    <Content Include="Asserts\Admin\font-awesome\scss\_mixins.scss" />
+    <Content Include="Asserts\Admin\font-awesome\scss\_path.scss" />
+    <Content Include="Asserts\Admin\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="Asserts\Admin\font-awesome\scss\_spinning.scss" />
+    <Content Include="Asserts\Admin\font-awesome\scss\_stacked.scss" />
+    <Content Include="Asserts\Admin\font-awesome\scss\_variables.scss" />
+    <Content Include="Asserts\Admin\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Asserts\Admin\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Asserts\Admin\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Asserts\User\font\Amble-Regular-webfont.ttf" />
+    <Content Include="Asserts\User\images\Thumbs.db" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -295,6 +416,12 @@
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

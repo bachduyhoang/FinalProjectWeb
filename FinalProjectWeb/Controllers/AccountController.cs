@@ -9,6 +9,8 @@ using Microsoft.Owin.Security;
 using FinalProjectWeb.Models;
 using System.Net;
 using Newtonsoft.Json.Linq;
+using BLL;
+
 
 namespace FinalProjectWeb.Controllers
 {
@@ -17,6 +19,8 @@ namespace FinalProjectWeb.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        UserModel account = new UserModel();
+
 
         public AccountController()
         {
@@ -68,8 +72,6 @@ namespace FinalProjectWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel model, string returnUrl)
         {
-            ProjectTGDD dbmodel = new ProjectTGDD();
-
             var response = Request["g-recaptcha-response"];
             string secretKey = "6LfVDYAaAAAAAO9Nq_5KUj4eqbZM-0hv93lMSnp0";
             var client = new WebClient();
@@ -84,11 +86,14 @@ namespace FinalProjectWeb.Controllers
             }
             try
             {
-                var user = dbmodel.Users.Where(x => x.userID == model.UserID && x.password == model.Password && x.status == true).Single();
-                if (user != null || status)
+                var user = account.checkUser(model.UserID, model.Password);
+                if (user != null && status)
+                {
+                    return RedirectToLocal(returnUrl);
+                }
+                else
                 {
                     ModelState.AddModelError("", "Invalid recaptcha!");
-                    return RedirectToLocal(returnUrl);
                 }
             }
             catch (Exception)
@@ -154,27 +159,18 @@ namespace FinalProjectWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterViewModel model, User userModel)
+        public ActionResult Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                ProjectTGDD dbmodel = new ProjectTGDD();
-                var userDetails = dbmodel.Users.Where(x => x.userID == model.UserID).FirstOrDefault();
-                var emailDetails = dbmodel.Users.Where(x => x.email == model.Email).FirstOrDefault();
+                var userDetails = account.checkInfo(model.UserID);
+                var emailDetails = account.checkEmail(model.Email);
 
                 if (userDetails == null)
-                { 
-                    if(emailDetails == null)
+                {
+                    if (emailDetails == null)
                     {
-                        userModel.userID = model.UserID;
-                        userModel.fullName = model.FullName;
-                        userModel.email = model.Email;
-                        userModel.password = model.Password;
-                        userModel.roleID = "us";
-                        userModel.status = true;
-                        userModel.dateCreated = DateTime.Now;
-                        dbmodel.Users.Add(userModel);
-                        dbmodel.SaveChanges();
+                        account.register(model.UserID, model.FullName, model.Email, model.Password);
 
                         return RedirectToAction("Login", "Account");
                     }
@@ -185,7 +181,7 @@ namespace FinalProjectWeb.Controllers
                     }
 
 
-                } 
+                }
                 else
                 {
                     ViewBag.Message = "User ID exists!";
@@ -350,9 +346,7 @@ namespace FinalProjectWeb.Controllers
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
 
-            ProjectTGDD dbmodel = new ProjectTGDD();
-            var userDetails = dbmodel.Users.Where(x => x.userID == loginInfo.Email).FirstOrDefault();
-
+            var userDetails = account.checkInfo(loginInfo.Email);
 
             if (userDetails != null)
             {
@@ -368,33 +362,28 @@ namespace FinalProjectWeb.Controllers
 
         }
 
+
         //
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl, User userModel)
+        public ActionResult ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
-            ProjectTGDD dbmodel = new ProjectTGDD();
-            var userDetails = dbmodel.Users.Where(x => x.userID == model.Email).FirstOrDefault();
+            var userDetails = account.checkInfo(model.Email);
+
             if (userDetails == null)
             {
 
                 String name = model.Email;
                 string[] arrListStr = name.Split('@');
 
-                userModel.userID = model.Email;
-                userModel.fullName = arrListStr[0];
-                userModel.roleID = "us";
-                userModel.status = true;
-                userModel.dateCreated = DateTime.Now;
-                userModel.email = model.Email;
-                dbmodel.Users.Add(userModel);
-                dbmodel.SaveChanges();
+                account.register(model.Email, arrListStr[0], model.Email, null);
 
             }
             return RedirectToAction("Index", "Home");
         }
+
 
         //
         // POST: /Account/LogOff
