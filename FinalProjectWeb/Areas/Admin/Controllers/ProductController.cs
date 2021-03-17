@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.IO;
 using BLL;
 using DAL.EF;
+using System.Web.Security;
 
 namespace FinalProjectWeb.Areas.Admin.Controllers
 {
@@ -17,6 +18,8 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
             var iplProduct = new ProductBLL();
             //ViewBag.Search = txtSearch;
             var model = iplProduct.GetListPaging(txtSearch, page, size);
+            
+
             return View(model);
         }
 
@@ -37,6 +40,7 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
 
         public ActionResult Create(Product product)
         {
+            
             try
             {
                 string fileName = Path.GetFileNameWithoutExtension(product.imageFile.FileName);
@@ -51,6 +55,8 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
                     int res = iplProduct.Create(product);
                     if (res > 0)
                     {
+                        int id = iplProduct.GetIdProduct();
+                        iplProduct.ActivityLog(id);
                         return RedirectToAction("Index");
                     }
                     else

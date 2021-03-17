@@ -25,5 +25,14 @@ namespace BLL
         {
             return model.Create(p);
         }
+
+        public void ActivityLog(int idProduct)
+        {
+            model.InsertActivity(idProduct);
+        }
+        public int GetIdProduct()
+        {
+            return model.GetIDProduct();
+        }
     }
 }

@@ -431,6 +431,7 @@
     <Content Include="bin\DAL.dll.config" />
     <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutLeft.cshtml" />
     <None Include="bin\FinalProjectWeb.dll.config" />
     <Content Include="bin\roslyn\csc.exe.config" />
     <Content Include="bin\roslyn\csc.rsp" />

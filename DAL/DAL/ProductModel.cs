@@ -12,6 +12,7 @@ namespace DAL.DAL
     public class ProductModel
     {
         DBContext context = null;
+        string strConnection = @"server=SE140695\SQLEXPRESS;database=ProjectTGDD;uid=sa;pwd=123";
 
         public ProductModel()
         {
@@ -20,13 +21,6 @@ namespace DAL.DAL
 
         public IEnumerable<Product> GetListPaging(string txtSearch, int page, int size)
         {
-            //IQueryable<Product> model = context.Products;
-            //if (!string.IsNullOrEmpty(txtSearch))
-            //{
-            //    model = model.Where(x => x.productName.Contains(txtSearch));
-            //}
-            //return model.OrderByDescending(x => x.dayCreated).ToPagedList(page, size);
-
             IQueryable<Product> model = context.Products;
             if (!string.IsNullOrEmpty(txtSearch))
             {
@@ -51,10 +45,54 @@ namespace DAL.DAL
             return res;
         }
 
+        public void InsertActivity(int ProductID)
+        {
+            object[] parameters =
+            {
+                new SqlParameter("@User", "admin"),
+                new SqlParameter("@ProductID", ProductID)
+            };
+            context.Database.ExecuteSqlCommand("Sp_Activity_Insert @User,@ProductID", parameters);
+        }
+
         public List<Product> GetListAll()
         {
             var list = context.Database.SqlQuery<Product>("Sp_Product_listAll").ToList();
             return list;
+        }
+
+        public int GetIDProduct()
+        {
+            int result = 0;
+            SqlConnection cnn = new SqlConnection(strConnection);
+            string SQL = "select top 1 productID " +
+                           "from Products " +
+                           "order by productID desc";
+            SqlCommand cmd = new SqlCommand(SQL, cnn);
+
+            try
+            {
+                if(cnn.State == System.Data.ConnectionState.Closed)
+                {
+                    cnn.Open();
+                }
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    result = int.Parse(reader[0].ToString());
+                }
+                
+            }
+            catch(Exception se)
+            {
+                throw new Exception(se.Message);
+            }
+            finally
+            {
+                cnn.Close();
+            }
+
+            return result;
         }
     }
 }
