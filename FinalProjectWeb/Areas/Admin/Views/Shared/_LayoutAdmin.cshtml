@@ -36,7 +36,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="Index.cshtml" >Dashboard</a>
+                @Html.ActionLink("Dashboard", "Index", "Dashboard", new { @class = "navbar-brand" })
+                @*<a class="navbar-brand" href="Index.cshtml">Dashboard</a>*@
             </div>
             <!-- /.navbar-header -->
 
@@ -76,9 +77,9 @@
     </div>
     <!-- /#wrapper -->
     <!-- Core Scripts - Include with every page -->
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="/Asserts/Admin/js/jquery-1.10.2.js"></script>
     <script src="/Asserts/Admin/js/bootstrap.min.js"></script>
-    <script src="/Asserts/Admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
     <!-- Page-Level Plugin Scripts - Dashboard -->
     <script src="/Asserts/Admin/js/plugins/morris/raphael-2.1.0.min.js"></script>

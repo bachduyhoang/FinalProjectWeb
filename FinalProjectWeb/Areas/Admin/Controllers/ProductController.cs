@@ -16,10 +16,8 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
         public ActionResult Index(string txtSearch, int page = 1, int size = 5)
         {
             var iplProduct = new ProductBLL();
-            //ViewBag.Search = txtSearch;
+            ViewBag.Search = txtSearch;
             var model = iplProduct.GetListPaging(txtSearch, page, size);
-            
-
             return View(model);
         }
 
@@ -40,7 +38,6 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
 
         public ActionResult Create(Product product)
         {
-            
             try
             {
                 string fileName = Path.GetFileNameWithoutExtension(product.imageFile.FileName);
@@ -76,40 +73,62 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
         // GET: Admin/Product/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var iplProduct = new ProductBLL();
+            Product p = iplProduct.GetProductById(id);
+            return View(p);
+        }
+        public ActionResult Delete(int id)
+        {
+            var iplProduct = new ProductBLL();
+            Product p = iplProduct.GetProductById(id);
+            return View(p);
         }
 
         // POST: Admin/Product/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Product p)
         {
-            try
+            string fileName = Path.GetFileNameWithoutExtension(p.imageFile.FileName);
+            string extension = Path.GetExtension(p.imageFile.FileName);
+            fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+            p.imageLink = "~/Image/" + fileName;
+            fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
+            p.imageFile.SaveAs(fileName);
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                var iplProduct = new ProductBLL();
+                p.productID = id;
+                var result = iplProduct.UpdateProduct(p);
+                if (result)
+                {
+                    iplProduct.ActivityLog(id);
+                    return RedirectToAction("Index", "Product");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Update Fail!");
+                }
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Admin/Product/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
+            return View("Index");
         }
 
         // POST: Admin/Product/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Product p)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                var iplProduct = new ProductBLL();
+                var res = iplProduct.DeleteProduct(id);
+                if (res)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Delete Fail!");
+                    return View("Index");
+                }
             }
             catch
             {

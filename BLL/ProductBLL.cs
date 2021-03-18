@@ -34,5 +34,22 @@ namespace BLL
         {
             return model.GetIDProduct();
         }
+
+        public Product GetProductById(int id)
+        {
+            return model.GetProductByID(id);
+        }
+
+        public bool UpdateProduct(Product p)
+        {
+            return model.Update(p);
+        }
+
+        public bool DeleteProduct(int id)
+        {
+            return model.Delete(id);
+        }
+
+
     }
 }

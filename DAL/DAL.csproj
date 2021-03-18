@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\ProductModel.cs" />
+    <Compile Include="DAL\UserModel.cs" />
     <Compile Include="EF\ActivityLog.cs" />
     <Compile Include="EF\Brand.cs" />
     <Compile Include="EF\DBContext.cs" />

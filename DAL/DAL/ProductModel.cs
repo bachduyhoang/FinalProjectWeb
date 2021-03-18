@@ -61,6 +61,32 @@ namespace DAL.DAL
             return list;
         }
 
+        public bool Update(Product p)
+        {
+            try
+            {
+                var product = GetProductByID(p.productID);
+                product.productName = p.productName;
+                product.imageLink = p.imageLink;
+                product.price = p.price;
+                product.quantity = p.quantity;
+                product.description = p.description;
+                product.status = p.status;
+                product.brandID = p.brandID;
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception se)
+            {
+                return false;
+            }
+        }
+
+        public Product GetProductByID(int id)
+        {
+            return context.Products.Find(id);
+        }
+
         public int GetIDProduct()
         {
             int result = 0;
@@ -72,7 +98,7 @@ namespace DAL.DAL
 
             try
             {
-                if(cnn.State == System.Data.ConnectionState.Closed)
+                if (cnn.State == System.Data.ConnectionState.Closed)
                 {
                     cnn.Open();
                 }
@@ -81,9 +107,9 @@ namespace DAL.DAL
                 {
                     result = int.Parse(reader[0].ToString());
                 }
-                
+
             }
-            catch(Exception se)
+            catch (Exception se)
             {
                 throw new Exception(se.Message);
             }
@@ -93,6 +119,30 @@ namespace DAL.DAL
             }
 
             return result;
+        }
+
+        public bool Delete(int id)
+        {
+            try
+            {
+                bool check;
+                SqlConnection cnn = new SqlConnection(strConnection);
+                string SQL = "update Products " +
+                            "set status = 0 " +
+                            "where productID = @ID";
+                SqlCommand cmd = new SqlCommand(SQL, cnn);
+                cmd.Parameters.AddWithValue("@ID", id);
+                if (cnn.State == System.Data.ConnectionState.Closed)
+                {
+                    cnn.Open();
+                }
+                check = cmd.ExecuteNonQuery() > 0;
+                return check;
+            }
+            catch (Exception se)
+            {
+                return false;
+            }
         }
     }
 }
