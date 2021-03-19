@@ -1,6 +1,9 @@
 ﻿
+@*@model PagedList.IPagedList<DAL.EF.User>
+@using PagedList.Mvc;*@
 @model PagedList.IPagedList<DAL.EF.User>
-@using PagedList.Mvc;
+@using PagedList.Mvc
+ 
 
 @{
     ViewBag.Title = "Index";
@@ -31,6 +34,7 @@
                             <th>Status</th>
                             <th>Day Create</th>
                             <th>Role</th>
+                            <th>Email</th>
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
@@ -45,6 +49,7 @@
                                 <td>@item.status</td>
                                 <td>@item.dateCreated</td>
                                 <td>@item.roleID</td>
+                                <td>@item.email</td>
                                 <td>
                                     <a href="/Admin/User/Edit/@item.userID">Update</a>
                                 </td>

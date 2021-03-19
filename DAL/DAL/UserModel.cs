@@ -42,8 +42,44 @@ namespace DAL.DAL
                 user.fullName = u.fullName;
                 user.password = u.password;
                 user.status = u.status;
-                context.SaveChanges();
-                return true;
+                user.email = u.email;
+                bool check = UpdateSQL(u.userID, u);
+                if (check)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception se)
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateSQL(string id, User u)
+        {
+            try
+            {
+                bool check = false; ;
+                SqlConnection cnn = new SqlConnection(strConnection);
+                string SQL = "update Users " +
+                            "set fullName=@Name,password=@Password,status=@Status,email=@Email " +
+                            "where userID=@ID";
+                SqlCommand cmd = new SqlCommand(SQL, cnn);
+                cmd.Parameters.AddWithValue("@ID", id);
+                cmd.Parameters.AddWithValue("@Name", u.fullName);
+                cmd.Parameters.AddWithValue("@Password", u.password);
+                cmd.Parameters.AddWithValue("@Status", u.status);
+                cmd.Parameters.AddWithValue("@Email", u.email);
+                if (cnn.State == System.Data.ConnectionState.Closed)
+                {
+                    cnn.Open();
+                }
+                check = cmd.ExecuteNonQuery() > 0;
+                return check;
             }
             catch (Exception se)
             {

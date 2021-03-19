@@ -66,11 +66,9 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
                 if (ModelState.IsValid)
                 {
                     var iplProduct = new UserBLL();
-                    u.userID = id;
-                    var result = iplProduct.UpdateUser(u);
-                    if (result)
+                    var res = iplProduct.UpdateUser(u);
+                    if (res)
                     {
-                        //iplProduct.ActivityLog(id);
                         return RedirectToAction("Index", "User");
                     }
                     else
@@ -79,8 +77,7 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
                     }
                 }
                 return View("Index");
-            }
-            catch
+            }catch(Exception e)
             {
                 return View();
             }

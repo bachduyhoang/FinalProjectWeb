@@ -19,6 +19,12 @@ namespace DAL.DAL
             context = new DBContext();
         }
 
+        public List<Brand> GetListBrand()
+        {
+            var list = context.Database.SqlQuery<Brand>("Sp_Brand_ListBrand").ToList();
+            return list;
+        }
+
         public IEnumerable<Product> GetListPaging(string txtSearch, int page, int size)
         {
             IQueryable<Product> model = context.Products;

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.IO;
 using BLL;
 using DAL.EF;
+using DAL.DAL;
 using System.Web.Security;
 
 namespace FinalProjectWeb.Areas.Admin.Controllers
@@ -30,6 +31,10 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
         // GET: Admin/Product/Create
         public ActionResult Create()
         {
+
+            var iplProduct = new ProductModel();
+            var Brand = iplProduct.GetListBrand();
+            ViewBag.Brand = new SelectList(Brand, "brandID", "brandName");
             return View();
         }
 
@@ -74,6 +79,8 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
         public ActionResult Edit(int id)
         {
             var iplProduct = new ProductBLL();
+            var Brand = iplProduct.GetListBrand();
+            ViewBag.Brand = new SelectList(Brand, "brandID", "brandName");
             Product p = iplProduct.GetProductById(id);
             return View(p);
         }

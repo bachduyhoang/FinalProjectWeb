@@ -31,6 +31,11 @@ namespace DAL.EF
                 .Property(e => e.brandID)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Brand>()
+                .HasMany(e => e.Products)
+                .WithRequired(e => e.Brand)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Discount>()
                 .Property(e => e.discountID)
                 .IsUnicode(false);
@@ -69,6 +74,10 @@ namespace DAL.EF
 
             modelBuilder.Entity<User>()
                 .Property(e => e.roleID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.email)
                 .IsUnicode(false);
         }
     }

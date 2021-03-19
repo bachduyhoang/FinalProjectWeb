@@ -16,6 +16,11 @@ namespace BLL
             return model.GetListPaging(txtSearch, page, size);
         }
 
+        public List<Brand> GetListBrand()
+        {
+            return model.GetListBrand();
+        }
+
         public List<Product> GetListAll()
         {
             return model.GetListAll();
