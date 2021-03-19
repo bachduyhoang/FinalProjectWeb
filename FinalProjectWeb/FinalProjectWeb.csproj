@@ -168,8 +168,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ActivityLogController.cs" />
     <Compile Include="Areas\Admin\Controllers\DiscountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrderDetailController.cs" />
+    <Compile Include="Areas\Admin\Models\ActivityLogModel.cs" />
     <Compile Include="Areas\Admin\Models\DiscountModel.cs" />
+    <Compile Include="Areas\Admin\Models\OrderDetailModel.cs" />
+    <Compile Include="Areas\Admin\Models\OrderModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -426,6 +431,9 @@
     <Content Include="Areas\Admin\Views\Discount\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Discount\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Discount\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\OrderDetail\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\OrderDetail\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ActivityLog\Index.cshtml" />
     <None Include="bin\FinalProjectWeb.dll.config" />
     <Content Include="bin\roslyn\csc.exe.config" />
     <Content Include="bin\roslyn\csc.rsp" />

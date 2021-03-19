@@ -100,7 +100,7 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View();
+            return View(dis);
         }
     }
 }

@@ -17,14 +17,14 @@ namespace BLL.BLL
 
         public List<Discount> GetList(int currentPage, string searchWord)
         {
-            int PAGE_SIZE = 1;
-            var list = context.Discounts.OrderBy(x => x.discountID).Skip((currentPage - 1) * PAGE_SIZE).Take(PAGE_SIZE).Where(x => x.discountID.Contains(searchWord)).ToList();
+            int PAGE_SIZE = 5;
+            var list = context.Discounts.OrderBy(x => x.discountID).Where(x => x.discountID.Contains(searchWord)).Skip((currentPage - 1) * PAGE_SIZE).Take(PAGE_SIZE).ToList();
             return list;
         }
 
         public int CountPage(string searchWord)
         {
-            int PAGE_SIZE = 1;
+            int PAGE_SIZE = 5;
             int totalPage = 0;
             int totalRow = context.Discounts.Where(x => x.discountID.Contains(searchWord)).Count();
             if (totalRow % PAGE_SIZE > 0)

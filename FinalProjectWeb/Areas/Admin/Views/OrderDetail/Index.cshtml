@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model FinalProjectWeb.Areas.Admin.Models.OrderModel
+
+<div style="margin-bottom:5rem; margin-top:5rem; padding:1rem; border: 1px solid black;">
+    @using (Html.BeginForm("Index", "OrderDetail", FormMethod.Post))
+    {
+        @Html.TextBoxFor(model => model.searchWord, new { @PlaceHolder = "Search" })
+        @Html.TextBoxFor(model => model.currentPage, new { @Value = 1, @Type = "hidden" })
+        <button type="submit">Search</button>
+    }
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>orderID</th>
+            <th>date</th>
+            <th>userID</th>
+            <th>total</th>
+            <th>status</th>
+            <th>discountID</th>
+            <th>Detail</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.list)
+        {
+            <tr>
+                <td>@item.orderID</td>
+                <td>@item.date</td>
+                <td>@item.userID</td>
+                <td>@item.total</td>
+                <td>@item.status</td>
+                <td>@item.discountID</td>
+                <td>
+                    @using (Html.BeginForm("Detail", "OrderDetail", FormMethod.Post))
+                    {
+                        @Html.TextBoxFor(model => model.orderID, new { @Type = "hidden", @Value = item.orderID })
+                        <button type="submit">Details</button>
+                    }
+                </td>
+                <td>
+                    @using (Html.BeginForm("Delete", "OrderDetail", FormMethod.Post))
+                    {
+                        @Html.TextBoxFor(model => model.orderID, new { @Type = "hidden", @Value = item.orderID })
+                        if (item.status == true)
+                        {
+                            <button type="submit">Delete</button>
+                        }
+                        else
+                        {
+                            <button type="submit">Restore</button>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model.totalPage > 1)
+{
+
+    if (Model.currentPage > 1)
+    {
+        <div style="float:left;">
+            @using (Html.BeginForm("Index", "OrderDetail", FormMethod.Post))
+            {
+                @Html.TextBoxFor(model => model.searchWord, new { @Value = Model.searchWord, @Type = "hidden" })
+                @Html.TextBoxFor(model => model.currentPage, new { @Value = 1, @Type = "hidden" })
+                <button type="submit">First</button>
+            }
+        </div>
+
+        <div style="float:left;">
+            @using (Html.BeginForm("Index", "OrderDetail", FormMethod.Post))
+            {
+                @Html.TextBoxFor(model => model.searchWord, new { @Value = Model.searchWord, @Type = "hidden" })
+                @Html.TextBoxFor(model => model.currentPage, new { @Value = Model.currentPage - 1, @Type = "hidden" })
+                <button type="submit">Previous</button>
+            }
+        </div>
+    }
+
+    for (var i = 1; i <= Model.totalPage; i++)
+    {
+        <div style="float:left;">
+            @using (Html.BeginForm("Index", "OrderDetail", FormMethod.Post))
+            {
+                @Html.TextBoxFor(model => model.searchWord, new { @Value = Model.searchWord, @Type = "hidden" })
+                @Html.TextBoxFor(model => model.currentPage, new { @Value = @i, @Type = "hidden" })
+                <button type="submit">@i</button>
+            }
+        </div>
+    }
+
+    if (Model.currentPage < Model.totalPage)
+    {
+        <div style="float:left;">
+            @using (Html.BeginForm("Index", "OrderDetail", FormMethod.Post))
+            {
+                @Html.TextBoxFor(model => model.searchWord, new { @Value = Model.searchWord, @Type = "hidden" })
+                @Html.TextBoxFor(model => model.currentPage, new { @Value = Model.currentPage + 1, @Type = "hidden" })
+                <button type="submit">Next</button>
+            }
+        </div>
+
+        <div style="float:left;">
+            @using (Html.BeginForm("Index", "OrderDetail", FormMethod.Post))
+            {
+                @Html.TextBoxFor(model => model.searchWord, new { @Value = Model.searchWord, @Type = "hidden" })
+                @Html.TextBoxFor(model => model.currentPage, new { @Value = Model.totalPage, @Type = "hidden" })
+                <button type="submit">Last</button>
+            }
+        </div>
+    }
+
+}
+
