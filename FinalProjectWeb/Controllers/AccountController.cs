@@ -354,9 +354,14 @@ namespace FinalProjectWeb.Controllers
             }
             else
             {
-                ViewBag.ReturnUrl = returnUrl;
-                ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                String name = loginInfo.Email;
+                string[] arrListStr = name.Split('@');
+
+                account.register(loginInfo.Email, arrListStr[0], loginInfo.Email, null);
+                return RedirectToAction("Index", "Home");
+                //ViewBag.ReturnUrl = returnUrl;
+                //ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
+                //return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
 
             }
 
