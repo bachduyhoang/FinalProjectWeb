@@ -35,6 +35,19 @@ namespace DAL.DAL
             return model.OrderByDescending(x => x.dayCreated).ToPagedList(page, size);
         }
 
+        public bool checkInteger(string input)
+        {
+            try
+            {
+                int.Parse(input);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
         public int Create(Product p)
         {
             object[] parameters =

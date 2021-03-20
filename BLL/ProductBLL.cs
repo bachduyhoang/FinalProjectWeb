@@ -44,6 +44,10 @@ namespace BLL
         {
             return model.GetProductByID(id);
         }
+        public bool checkInteger(string input)
+        {
+            return model.checkInteger(input);
+        }
 
         public bool UpdateProduct(Product p)
         {

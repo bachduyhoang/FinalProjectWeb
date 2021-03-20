@@ -99,6 +99,7 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(int id, Product p)
         {
+            var iplProduct = new ProductBLL();
             string fileName = Path.GetFileNameWithoutExtension(p.imageFile.FileName);
             string extension = Path.GetExtension(p.imageFile.FileName);
             fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
@@ -107,7 +108,6 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
             p.imageFile.SaveAs(fileName);
             if (ModelState.IsValid)
             {
-                var iplProduct = new ProductBLL();
                 p.productID = id;
                 var result = iplProduct.UpdateProduct(p);
                 if (result)

@@ -34,7 +34,8 @@ namespace DAL.EF
 
         [DisplayName("Product Price")]
         [Required]
-        public double price { get; set; }
+        [Range(typeof(Decimal), "1", "9999", ErrorMessage = "Price incorrect!"]
+        public double? price { get; set; }
 
         [DisplayName("Product Quantity")]
         [Required]

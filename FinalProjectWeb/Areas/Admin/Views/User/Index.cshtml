@@ -1,6 +1,4 @@
 ﻿
-@*@model PagedList.IPagedList<DAL.EF.User>
-@using PagedList.Mvc;*@
 @model PagedList.IPagedList<DAL.EF.User>
 @using PagedList.Mvc
  
@@ -60,7 +58,7 @@
                         }
                     </tbody>
                 </table>
-                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.Search }))
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @txtSearch = @ViewBag.Search }))
             </div>
         </div>
     </div>
