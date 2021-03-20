@@ -6,6 +6,10 @@
 }
 
 <h2>Edit</h2>
+@{ 
+    string experyDate = Model.expiry.HasValue ? Model.expiry.Value.ToString("yyyy-MM-dd") : string.Empty;
+}
+
 
 @using (Html.BeginForm("Edit", "Discount", FormMethod.Post))
 {
@@ -42,7 +46,7 @@
         @Html.LabelFor(model => model.expiry, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Model.expiry
-            @Html.TextBoxFor(model => model.expiry, new { @class = "form-control", @Type = "date", @Id = "datefield", @Min = "" })
+            @Html.TextBoxFor(model => model.expiry, new { @class = "form-control", @Type = "date", @Id = "datefield", @Min = "" , @Value=experyDate})
             @Html.ValidationMessageFor(model => model.expiry, "", new { @class = "text-danger" })
         </div>
     </div>
