@@ -31,7 +31,6 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
         // GET: Admin/Product/Create
         public ActionResult Create()
         {
-
             var iplProduct = new ProductModel();
             var Brand = iplProduct.GetListBrand();
             ViewBag.Brand = new SelectList(Brand, "brandID", "brandName");
@@ -45,6 +44,9 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
         {
             try
             {
+                var iplProduct = new ProductBLL();
+                var Brand = iplProduct.GetListBrand();
+                ViewBag.Brand = new SelectList(Brand, "brandID", "brandName");
                 string fileName = Path.GetFileNameWithoutExtension(product.imageFile.FileName);
                 string extension = Path.GetExtension(product.imageFile.FileName);
                 fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
@@ -53,7 +55,6 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
                 product.imageFile.SaveAs(fileName);
                 if (ModelState.IsValid)
                 {
-                    var iplProduct = new ProductBLL();
                     int res = iplProduct.Create(product);
                     if (res > 0)
                     {
@@ -65,9 +66,12 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
                     {
                         ModelState.AddModelError("", "Create fail!");
                     }
-
+                    return View(product);
                 }
-                return View(product);
+                else
+                {
+                    return View();
+                }
             }
             catch
             {
