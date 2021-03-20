@@ -27,7 +27,7 @@ namespace BLL
             return p.GetListBrand();
         }
 
-        public List<Product> GetListOfBrand(string brandName,ref int totalRecord, int index = 1, int maxPage = 5)
+        public List<Product> GetListOfBrand(string brandName,ref int totalRecord, int index = 1, int maxPage = 20)
         {
             return p.GetListOfBrand(brandName,ref totalRecord ,index, maxPage);
         }
@@ -35,6 +35,11 @@ namespace BLL
         public Product GetProduct(int id)
         {
             return p.GetProduct(id);
+        }
+
+        public List<Product> GetListAllProduct(string name, ref int totalRecord, int index = 1, int maxPage = 20)
+        {
+            return p.GetListAllProduct(name,ref totalRecord, index,maxPage);
         }
     }
 }

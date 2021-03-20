@@ -20,16 +20,18 @@ namespace FinalProjectWeb.Controllers
 
         public ActionResult Brand(string brand, int index = 1)
         {
-            int pageSize = 1;
+            int pageSize = 20;
             ProductBLL dao = new ProductBLL();
             int totalRecord = 0;
             var listBrand = dao.GetListOfBrand(brand, ref totalRecord, index,pageSize);
-            int maxPage = 5;
-            int totalPage = 0;
-            totalPage = (int)Math.Ceiling((double)(totalRecord / pageSize));
+            int totalPage = (totalRecord / pageSize);
+            if(totalPage % pageSize != 0)
+            {
+                totalPage++;
+            }
+
             ViewBag.TotalPage = totalPage;
             ViewBag.Index = index;
-            ViewBag.MaxPage = maxPage;
             ViewBag.First = 1;
             ViewBag.Last = totalPage;
             ViewBag.Next = index + 1;

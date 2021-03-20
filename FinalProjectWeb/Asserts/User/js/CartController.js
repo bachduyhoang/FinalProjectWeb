@@ -32,6 +32,34 @@
                 }
             })
         });
+
+        $('#btnDeleteCart').off('click').on('click', function () {
+            $.ajax({
+                url: '/cart/deleteall',
+                dataType: 'json',
+                type: 'POST',
+                success: function (res) {
+                    if (res.status == true) {
+                        window.location.href = "/cart";
+                    }
+                }
+            })
+        });
+
+        $('.btnDelete').off('click').on('click', function (e) {
+            $.ajax({
+                data: { id: $(this).data('id') },
+                url: '/cart/delete',
+                dataType: 'json',
+                type: 'POST',
+                success: function (res) {
+                    if (res.status == true) {
+                        window.location.href = "/cart";
+                    }
+                }
+            })
+        });
+
     }
 }
 cart.init();

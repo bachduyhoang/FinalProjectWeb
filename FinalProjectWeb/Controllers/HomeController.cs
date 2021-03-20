@@ -11,11 +11,27 @@ namespace FinalProjectWeb.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string name="", int index = 1)
         {
-            ProductBLL product = new ProductBLL();
-            List<Product> p = product.GetListNew();
-            return View(p);
+            int pageSize = 20;
+            ProductBLL dao = new ProductBLL();
+            int totalRecord = 0;
+            var listName = dao.GetListAllProduct(name, ref totalRecord, index, pageSize);
+            int totalPage = (totalRecord / pageSize);
+            if (totalPage % pageSize != 0)
+            {
+                totalPage++;
+            }
+
+            ViewBag.TotalPage = totalPage;
+            ViewBag.Index = index;
+            ViewBag.First = 1;
+            ViewBag.Last = totalPage;
+            ViewBag.Next = index + 1;
+            ViewBag.Prev = index - 1;
+            ViewBag.Name = name;
+
+            return View(listName);
         }
 
         public ActionResult About()

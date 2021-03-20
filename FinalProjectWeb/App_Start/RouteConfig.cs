@@ -25,8 +25,22 @@ namespace FinalProjectWeb
 
             routes.MapRoute(
             name: "Cart Update",
-            url: "cart/{update}",
+            url: "cart/update",
             defaults: new { controller = "Cart", action = "Update", id = UrlParameter.Optional },
+            namespaces: new[] { "FinalProjectWeb.Controllers" }
+            );
+
+            routes.MapRoute(
+            name: "Delete All Cart ",
+            url: "cart/deleteall",
+            defaults: new { controller = "Cart", action = "Delete", id = UrlParameter.Optional },
+            namespaces: new[] { "FinalProjectWeb.Controllers" }
+            );
+
+            routes.MapRoute(
+            name: "Delete Item Cart ",
+            url: "cart/delete",
+            defaults: new { controller = "Cart", action = "DeleteItem", id = UrlParameter.Optional },
             namespaces: new[] { "FinalProjectWeb.Controllers" }
             );
 
@@ -48,6 +62,13 @@ namespace FinalProjectWeb
                 name: "Product Brand 1",
                 url: "product",
                 defaults: new { controller = "Product", action = "Brand", id = UrlParameter.Optional },
+                namespaces: new[] { "FinalProjectWeb.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Home",
+                url: "home",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 namespaces: new[] { "FinalProjectWeb.Controllers" }
             );
 

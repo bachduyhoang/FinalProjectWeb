@@ -25,10 +25,16 @@ namespace DAL.DAL
             return db.Brands.ToList();
         }
 
-        public List<Product> GetListOfBrand(string brandName, ref int totalRecord, int index = 1, int maxPage = 5)
+        public List<Product> GetListOfBrand(string brandName, ref int totalRecord, int index = 1, int maxPage = 20)
         {
             totalRecord = db.Products.Where(x => x.brandID.Contains(brandName)).Count();
             return db.Products.Where(x => x.brandID.Contains(brandName)).OrderBy(x => x.dayCreated).Skip((index - 1) * maxPage).Take(maxPage).ToList();
+        }
+
+        public List<Product> GetListAllProduct(string name, ref int totalRecord, int index = 1, int maxPage = 20)
+        {
+            totalRecord = db.Products.Where(x => x.productName.Contains(name)).Count();
+            return db.Products.Where(x => x.productName.Contains(name)).OrderBy(x => x.quantity).Skip((index - 1) * maxPage).Take(maxPage).ToList();
         }
 
         public Product GetProduct(int id)

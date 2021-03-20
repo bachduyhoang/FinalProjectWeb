@@ -30,14 +30,14 @@ namespace FinalProjectWeb.Controllers
             var product = dao.GetProduct(i);
 
             List<CartModels> cart = (List<CartModels>)Session[CartSession];
-            if(cart == null)
+            if (cart == null)
             {
                 cart = new List<CartModels>();
             }
 
             var item = cart.FirstOrDefault(a => a.Product.productID == product.productID);
 
-            if(item != null)
+            if (item != null)
             {
                 item.Quantity += q;
             }
@@ -70,8 +70,37 @@ namespace FinalProjectWeb.Controllers
 
             return Json(new
             {
-                 status = true
-            }) ;
+                status = true
+            });
+        }
+
+        public JsonResult Delete()
+        {
+            List<CartModels> cart = (List<CartModels>)Session[CartSession];
+            if (cart != null)
+            {
+                Session[CartSession] = null;
+            }
+
+            return Json(new
+            {
+                status = true
+            });
+
+        }
+
+        public JsonResult DeleteItem(int id)
+        {
+            List<CartModels> cart = (List<CartModels>)Session[CartSession];
+            if (cart != null)
+            {
+                cart.RemoveAll(x => x.Product.productID == id);
+                Session[CartSession] = cart;
+            }
+            return Json(new
+            {
+                status = true
+            });
         }
     }
 }
