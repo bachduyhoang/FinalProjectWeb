@@ -41,5 +41,20 @@ namespace BLL
         {
             return p.GetListAllProduct(name,ref totalRecord, index,maxPage);
         }
+
+        public int GetMaxQuantity(int id)
+        {
+            return p.GetMaxQuantity(id);
+        }
+
+        public int InsertOrder(Order o)
+        {
+            return p.InsertOrder(o);
+        }
+
+        public void InsertOrderDetail(OrderDetail detail)
+        {
+            p.InsertOrderDetail(detail);
+        }
     }
 }

@@ -41,5 +41,22 @@ namespace DAL.DAL
         {
             return db.Products.Find(id);
         }
+        public int GetMaxQuantity(int id)
+        {
+            return (int)db.Products.Find(id).quantity;
+        }
+
+        public int InsertOrder(Order o )
+        {
+            db.Orders.Add(o);
+            db.SaveChanges();
+            return o.orderID;
+        }
+
+        public void InsertOrderDetail(OrderDetail orderDetail)
+        {
+            db.OrderDetails.Add(orderDetail);
+            db.SaveChanges();
+        }
     }
 }

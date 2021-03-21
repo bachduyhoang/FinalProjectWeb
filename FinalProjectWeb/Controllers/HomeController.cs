@@ -30,21 +30,27 @@ namespace FinalProjectWeb.Controllers
             ViewBag.Next = index + 1;
             ViewBag.Prev = index - 1;
             ViewBag.Name = name;
-
             return View(listName);
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult Delivery()
+        {
+            return View();
+        }
+
+        public ActionResult News()
+        {
             return View();
         }
 

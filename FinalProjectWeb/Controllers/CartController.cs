@@ -1,4 +1,5 @@
 ﻿using BLL;
+using DAL.EF;
 using FinalProjectWeb.Models;
 using System;
 using System.Collections.Generic;
@@ -101,6 +102,57 @@ namespace FinalProjectWeb.Controllers
             {
                 status = true
             });
+        }
+
+        public ActionResult CheckOut()
+        {
+            List<CartModels> cart = (List<CartModels>)Session[CartSession];
+            List<CartModels> listInvalid = new List<CartModels>();
+            bool check = true;
+            float totalBill = 0;
+            if (cart != null)
+            {
+                ProductBLL dao = new ProductBLL();
+                foreach (var item in cart)
+                {
+                    int maxQuantity = dao.GetMaxQuantity(item.Product.productID);
+                    if(item.Quantity > maxQuantity)
+                    {
+                        item.Quantity = maxQuantity;
+                        listInvalid.Add(item);
+                        check = false;
+                    }
+                   totalBill += (float)(item.Product.price * item.Quantity);
+                }
+
+                if (check)
+                {
+                    Order o = new Order { date = DateTime.Now,
+                        userID = "hoang",
+                        total = totalBill
+                    };
+                    int id = dao.InsertOrder(o);
+                    foreach (var item in cart)
+                    {
+                        OrderDetail orderDetail = new OrderDetail
+                        {
+                            orderID = id,
+                            productID = item.Product.productID,
+                            quantity = item.Quantity,
+                            total = item.Quantity * item.Product.price
+                        };
+                        dao.InsertOrderDetail(orderDetail);
+                    }
+                    Session[CartSession] = null;
+                }
+                else
+                {
+                    Session[CartSession] = cart;
+                    return RedirectToAction("Index");
+                }
+
+            }
+            return View();
         }
     }
 }

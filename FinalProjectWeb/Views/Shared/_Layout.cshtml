@@ -84,17 +84,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="menu">
                     <ul>
                         <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="delivery.html">Delivery</a></li>
-                        <li><a href="news.html">News</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Delivery", "Delivery", "Home")</li>
+                        <li>@Html.ActionLink("News", "News", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         <div class="clear"></div>
                     </ul>
                 </div>
                 <div class="search_box">
-                    <form>
-                        <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}"><input type="submit" value="">
-                    </form>
+                    @using (Html.BeginForm("Index", "Home"))
+                    {
+                        <input type="text" id="name" name="name" value="@ViewBag.Name" placeholder="Search"><input type="submit" value="">
+
+                    }
                 </div>
                 <div class="clear"></div>
             </div>

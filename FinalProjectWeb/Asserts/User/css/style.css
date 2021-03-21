@@ -339,14 +339,13 @@ body {
 }
 .images_1_of_4 {
 	width: 20.8%;
-	height: 177px;
 	padding: 1.5%;
 	text-align: center;
 	position: relative;
 }
 	.images_1_of_4 img {
 		max-width: 100%;
-		height: 177px;
+		height: 220px;
 	}
 
 .images_1_of_4  h2 {

@@ -31,6 +31,13 @@ namespace FinalProjectWeb
             );
 
             routes.MapRoute(
+            name: "Cart CheckOut",
+            url: "cart/checkout",
+            defaults: new { controller = "Cart", action = "CheckOut", id = UrlParameter.Optional },
+            namespaces: new[] { "FinalProjectWeb.Controllers" }
+            );
+
+            routes.MapRoute(
             name: "Delete All Cart ",
             url: "cart/deleteall",
             defaults: new { controller = "Cart", action = "Delete", id = UrlParameter.Optional },
