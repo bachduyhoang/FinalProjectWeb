@@ -1,8 +1,71 @@
-﻿
+﻿@model List<DAL.EF.Product>
+
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    ViewBag.Title = "AllProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+@if (Model != null && Model.Count > 0)
+{
+    <div class="section group">
+        <div class="content_top">
+            <h3>All Product</h3>
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="grid_1_of_4 images_1_of_4 ">
+                <a href="/product/detail-@item.productID"><img src="@item.imageLink" /></a>
+                <h2>@item.productName </h2>
+                <div class="price-details">
+                    <div class="price-number">
+                        <p><span class="rupees">$@item.price</span></p>
+                    </div>
+                    <div class="add-cart">
+                        <h4><a href="/add-to-cart?i=@item.productID&q=1">Add to Cart</a></h4>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        }
+    </div>
+
+    if (ViewBag.TotalPage > 1)
+    {
+        int totalPage = (int)ViewBag.TotalPage;
+        int currentPage = (int)ViewBag.Index;
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                @if (currentPage > ViewBag.First)
+                {
+                    <li class="page-item"><a class="page-link" href="/home?name=@ViewBag.Name&index=@ViewBag.First">First</a></li>
+                    <li class="page-item"><a class="page-link" href="/home?name=@ViewBag.Name&index=@ViewBag.Prev">Previous</a></li>
+                }
+
+                @for (int i = 1; i <= totalPage; i++)
+                {
+                    if (i == currentPage)
+                    {
+                        <li class="page-item active"><a a class="page-link " href="/home?name=@ViewBag.Name&index=@i">@i</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a a class="page-link" href="/home?name=@ViewBag.Name&index=@i">@i</a></li>
+                    }
+                }
+                @if (currentPage < totalPage)
+                {
+                    <li class="page-item"><a class="page-link" href="/home?name=@ViewBag.Name&index=@ViewBag.Next">Next</a></li>
+                    <li class="page-item"><a class="page-link" href="/home?name=@ViewBag.Name&index=@ViewBag.Last">Last</a></li>
+                }
+
+
+            </ul>
+        </nav>
+    }
+
+}
+            else
+            {
+                <span>Don't have product</span>
+            }
 

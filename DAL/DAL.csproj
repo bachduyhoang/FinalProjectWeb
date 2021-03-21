@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\ProductDAL.cs" />
     <Compile Include="EF\ActivityLog.cs" />
     <Compile Include="EF\Brand.cs" />
     <Compile Include="EF\DBContext.cs" />
@@ -64,9 +65,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DAL\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

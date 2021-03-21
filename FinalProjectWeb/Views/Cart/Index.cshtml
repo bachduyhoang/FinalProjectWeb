@@ -1,0 +1,67 @@
+﻿@model List<FinalProjectWeb.Models.CartModels>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+@section js{
+    <script src="/Asserts/User/js/CartController.js"></script>
+}
+
+<div class="content">
+
+
+    <div class="section group">
+
+        @if (Model.Count > 0)
+        {
+                <div class="container">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Product Name</th>
+                                <th>Image</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td>@item.Product.productID</td>
+                                    <td>@item.Product.productName</td>
+                                    <td><img src="@item.Product.imageLink" width="100" /></td>
+                                    <td><input class="quantity" data-id="@item.Product.productID" type="number" min="1" max="@item.Product.quantity" value="@item.Quantity" /></td>
+                                    <td>@item.Product.price.GetValueOrDefault(0)</td>
+                                    <td>@(item.Quantity * item.Product.price.GetValueOrDefault(0))</td>
+                                    <td><a href="#" data-id="@item.Product.productID" class="btnDelete">Delete</a></td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                        <div class="text-center">
+                            <button id="btnContinue" class="btn button" type="submit"> Continue Buy</button>
+                            <button id="btnUpdate" class="btn button" type="submit"> Update</button>
+                            <button id="btnDeleteCart" class="btn button" type="submit"> Delete All</button>
+                            <button id="btnCheckOut" class="btn button" type="submit"> <a href="cart/checkout">Check Out </a></button>
+                        </div>
+
+                    </div>
+
+            }
+            else
+            {
+                <span class="alert-danger">Your cart is empty </span>
+            }
+
+    </div>
+</div>
+
+
+
