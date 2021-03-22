@@ -16,12 +16,18 @@ namespace DAL.EF
         }
 
         [StringLength(50)]
+        [Required]
         public string discountID { get; set; }
 
+        [Required]
+        [Range(0,100, ErrorMessage ="Bettween 0 and 100")]
         public int? discountPercent { get; set; }
-
+        
         public DateTime? dayCreated { get; set; }
-
+        
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? expiry { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

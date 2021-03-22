@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model FinalProjectWeb.Areas.Admin.Models.DiscountModel
+
+
+<div style="margin-bottom:5rem; margin-top:5rem; padding:1rem; border: 1px solid black;">
+    @using (Html.BeginForm("Index", "Discount", FormMethod.Post))
+    {
+        @Html.TextBoxFor(model => model.searchWord, new { @PlaceHolder = "Search" })
+        @Html.TextBoxFor(model => model.currentPage, new { @Value = 1, @Type = "hidden" })
+        <button  type="submit">Search</button>
+    }
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>DiscountID</td>
+            <td>DiscountPercent</td>
+            <td>DayCreated</td>
+            <td>Expiry</td>
+            <td>Update</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.list)
+        {
+            <tr>
+                <td>@item.discountID</td>
+                <td>@item.discountPercent</td>
+                <td>@item.dayCreated</td>
+                <td>@item.expiry</td>
+                <td>
+                    @using (Html.BeginForm("Edit", "Discount", FormMethod.Get))
+                    {
+                        @Html.TextBoxFor(model => model.discountID, new { @Type = "hidden", @Value = item.discountID })
+                        <button  type="submit">Edit</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.totalPage > 1)
+{
+
+    if (Model.currentPage > 1)
+    {
+        <div class="media" style="float:left;">
+            @using (Html.BeginForm("Index", "Discount", FormMethod.Post))
+            {
+                @Html.TextBoxFor(model => model.searchWord, new { @Value = Model.searchWord, @Type = "hidden" })
+                @Html.TextBoxFor(model => model.currentPage, new { @Value = 1, @Type = "hidden" })
+                <button  type="submit">First</button>
+            }
+        </div>
+        <div class="media" style="float:left;">
+            @using (Html.BeginForm("Index", "Discount", FormMethod.Post))
+            {
+                @Html.TextBoxFor(model => model.searchWord, new { @Value = Model.searchWord, @Type = "hidden" })
+                @Html.TextBoxFor(model => model.currentPage, new { @Value = Model.currentPage - 1, @Type = "hidden" })
+                <button  type="submit">Previous</button>
+            }
+        </div>
+    }
+    for (var i = 1; i <= Model.totalPage; i++)
+    {
+        <div class="media" style="float:left;">
+            @using (Html.BeginForm("Index", "Discount", FormMethod.Post))
+            {
+                @Html.TextBoxFor(model => model.searchWord, new { @Value = Model.searchWord, @Type = "hidden" })
+                @Html.TextBoxFor(model => model.currentPage, new { @Value = i, @Type = "hidden" })
+                <button  type="submit">@i</button>
+            }
+        </div>
+    }
+
+    if (Model.currentPage < Model.totalPage)
+    {
+        <div class="media" style="float:left;">
+            @using (Html.BeginForm("Index", "Discount", FormMethod.Post))
+            {
+                @Html.TextBoxFor(model => model.searchWord, new { @Value = Model.searchWord, @Type = "hidden" })
+                @Html.TextBoxFor(model => model.currentPage, new { @Value = Model.currentPage + 1, @Type = "hidden" })
+                <button  type="submit">Next</button>
+            }
+        </div>
+
+        <div class="media" style="float:left;">
+            @using (Html.BeginForm("Index", "Discount", FormMethod.Post))
+            {
+                @Html.TextBoxFor(model => model.searchWord, new { @Value = Model.searchWord, @Type = "hidden" })
+                @Html.TextBoxFor(model => model.currentPage, new { @Value = Model.totalPage, @Type = "hidden" })
+                <button  type="submit">Last</button>
+            }
+        </div>
+    }
+
+}
