@@ -5,6 +5,7 @@ namespace DAL.EF
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web;
 
     public partial class Product
     {
@@ -22,6 +23,9 @@ namespace DAL.EF
 
         [StringLength(300)]
         public string imageLink { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase imageFile { get; set; }
 
         public double? price { get; set; }
 
