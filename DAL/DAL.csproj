@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\AccountModel.cs" />
     <Compile Include="DAL\ProductModel.cs" />
     <Compile Include="DAL\UserModel.cs" />
     <Compile Include="DAL\ProductDAL.cs" />
