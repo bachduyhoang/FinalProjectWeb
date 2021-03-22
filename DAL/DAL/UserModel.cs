@@ -12,7 +12,6 @@ namespace DAL.DAL
     public class UserModel
     {
         DBContext context = null;
-        string strConnection = @"server=SE140695\SQLEXPRESS;database=ProjectTGDD;uid=sa;pwd=123";
 
         public UserModel()
         {
@@ -43,15 +42,8 @@ namespace DAL.DAL
                 user.password = u.password;
                 user.status = u.status;
                 user.email = u.email;
-                bool check = UpdateSQL(u.userID, u);
-                if (check)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                context.SaveChanges();
+                return true;
             }
             catch (Exception se)
             {
@@ -59,56 +51,11 @@ namespace DAL.DAL
             }
         }
 
-        public bool UpdateSQL(string id, User u)
+        public void Delete(string id)
         {
-            try
-            {
-                bool check = false; ;
-                SqlConnection cnn = new SqlConnection(strConnection);
-                string SQL = "update Users " +
-                            "set fullName=@Name,password=@Password,status=@Status,email=@Email " +
-                            "where userID=@ID";
-                SqlCommand cmd = new SqlCommand(SQL, cnn);
-                cmd.Parameters.AddWithValue("@ID", id);
-                cmd.Parameters.AddWithValue("@Name", u.fullName);
-                cmd.Parameters.AddWithValue("@Password", u.password);
-                cmd.Parameters.AddWithValue("@Status", u.status);
-                cmd.Parameters.AddWithValue("@Email", u.email);
-                if (cnn.State == System.Data.ConnectionState.Closed)
-                {
-                    cnn.Open();
-                }
-                check = cmd.ExecuteNonQuery() > 0;
-                return check;
-            }
-            catch (Exception se)
-            {
-                return false;
-            }
-        }
-
-        public bool Delete(string id)
-        {
-            try
-            {
-                bool check;
-                SqlConnection cnn = new SqlConnection(strConnection);
-                string SQL = "update Users " +
-                            "set status = 0 " +
-                            "where userID = @ID";
-                SqlCommand cmd = new SqlCommand(SQL, cnn);
-                cmd.Parameters.AddWithValue("@ID", id);
-                if (cnn.State == System.Data.ConnectionState.Closed)
-                {
-                    cnn.Open();
-                }
-                check = cmd.ExecuteNonQuery() > 0;
-                return check;
-            }
-            catch (Exception se)
-            {
-                return false;
-            }
+            var user = context.Users.Find(id);
+            user.status = false;
+            context.SaveChanges();
         }
     }
 }

@@ -82,9 +82,9 @@ namespace BLL
         {
             model.InsertActivity(idProduct);
         }
-        public int GetIdProduct()
+        public int GetMaxID()
         {
-            return model.GetIDProduct();
+            return model.GetMaxID();
         }
 
         public Product GetProductById(int id)
@@ -101,9 +101,9 @@ namespace BLL
             return model.Update(p);
         }
 
-        public bool DeleteProduct(int id)
+        public void DeleteProduct(int id)
         {
-            return model.Delete(id);
+            model.Delete(id);
         }
     }
 }

@@ -50,15 +50,15 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
                 string fileName = Path.GetFileNameWithoutExtension(product.imageFile.FileName);
                 string extension = Path.GetExtension(product.imageFile.FileName);
                 fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                product.imageLink = "~Areas/Image/" + fileName;
-                fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
+                product.imageLink = "~/Areas/Image/" + fileName;
+                fileName = Path.Combine(Server.MapPath("~/Areas/Image/"), fileName);
                 product.imageFile.SaveAs(fileName);
                 if (ModelState.IsValid)
                 {
                     int res = iplProduct.Create(product);
                     if (res > 0)
                     {
-                        int id = iplProduct.GetIdProduct();
+                        int id = iplProduct.GetMaxID();
                         iplProduct.ActivityLog(id);
                         return RedirectToAction("Index");
                     }
@@ -103,8 +103,8 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
             string fileName = Path.GetFileNameWithoutExtension(p.imageFile.FileName);
             string extension = Path.GetExtension(p.imageFile.FileName);
             fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-            p.imageLink = "~/Image/" + fileName;
-            fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
+            p.imageLink = "~/Areas/Image/" + fileName;
+            fileName = Path.Combine(Server.MapPath("~/Areas/Image/"), fileName);
             p.imageFile.SaveAs(fileName);
             if (ModelState.IsValid)
             {
@@ -130,16 +130,8 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
             try
             {
                 var iplProduct = new ProductBLL();
-                var res = iplProduct.DeleteProduct(id);
-                if (res)
-                {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Delete Fail!");
-                    return View("Index");
-                }
+                iplProduct.DeleteProduct(id);
+                return RedirectToAction("Index");
             }
             catch
             {
