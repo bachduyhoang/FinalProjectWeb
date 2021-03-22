@@ -2,7 +2,6 @@ namespace DAL.EF
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -19,28 +18,20 @@ namespace DAL.EF
         [StringLength(50)]
         public string userID { get; set; }
 
-        [StringLength(50, ErrorMessage = "Max length is 50 character!")]
-        [DisplayName("Name")]
-        [Required]
+        [StringLength(50)]
         public string fullName { get; set; }
 
-        [DisplayName("Password")]
-        [Required]
+        [StringLength(50)]
         public string password { get; set; }
 
-        [DisplayName("Status")]
         public bool? status { get; set; }
 
-        [DisplayName("Day Create")]
         public DateTime? dateCreated { get; set; }
 
         [StringLength(10)]
-        [DisplayName("Role")]
         public string roleID { get; set; }
 
         [StringLength(50)]
-        [DisplayName("Email")]
-        [EmailAddress(ErrorMessage = "Please enter correct email format! (ex: nvathy091@gmail.com)")]
         public string email { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

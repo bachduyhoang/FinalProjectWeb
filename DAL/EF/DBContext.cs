@@ -19,6 +19,7 @@ namespace DAL.EF
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -30,11 +31,6 @@ namespace DAL.EF
             modelBuilder.Entity<Brand>()
                 .Property(e => e.brandID)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<Brand>()
-                .HasMany(e => e.Products)
-                .WithRequired(e => e.Brand)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Discount>()
                 .Property(e => e.discountID)
