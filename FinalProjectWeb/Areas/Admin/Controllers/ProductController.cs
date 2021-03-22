@@ -45,7 +45,7 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
             try
             {
                 var iplProduct = new ProductBLL();
-                var Brand = iplProduct.GetListBrand();
+                var Brand = iplProduct.GetListBrandThy();
                 ViewBag.Brand = new SelectList(Brand, "brandID", "brandName");
                 string fileName = Path.GetFileNameWithoutExtension(product.imageFile.FileName);
                 string extension = Path.GetExtension(product.imageFile.FileName);

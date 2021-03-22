@@ -11,6 +11,7 @@ namespace BLL
 {
     public class ProductBLL
     {
+        ProductModel model = new ProductModel();
         private ProductDAL p = null;
 
         public ProductBLL()
@@ -55,6 +56,54 @@ namespace BLL
         public void InsertOrderDetail(OrderDetail detail)
         {
             p.InsertOrderDetail(detail);
+        }
+
+        public IEnumerable<Product> GetListPaging(string txtSearch, int page, int size)
+        {
+            return model.GetListPaging(txtSearch, page, size);
+        }
+
+        public List<Brand> GetListBrandThy()
+        {
+            return model.GetListBrand();
+        }
+
+        public List<Product> GetListAll()
+        {
+            return model.GetListAll();
+        }
+
+        public int Create(Product p)
+        {
+            return model.Create(p);
+        }
+
+        public void ActivityLog(int idProduct)
+        {
+            model.InsertActivity(idProduct);
+        }
+        public int GetIdProduct()
+        {
+            return model.GetIDProduct();
+        }
+
+        public Product GetProductById(int id)
+        {
+            return model.GetProductByID(id);
+        }
+        public bool checkInteger(string input)
+        {
+            return model.checkInteger(input);
+        }
+
+        public bool UpdateProduct(Product p)
+        {
+            return model.Update(p);
+        }
+
+        public bool DeleteProduct(int id)
+        {
+            return model.Delete(id);
         }
     }
 }
