@@ -50,7 +50,7 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
                 string fileName = Path.GetFileNameWithoutExtension(product.imageFile.FileName);
                 string extension = Path.GetExtension(product.imageFile.FileName);
                 fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                product.imageLink = "~/Image/" + fileName;
+                product.imageLink = "~Areas/Image/" + fileName;
                 fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
                 product.imageFile.SaveAs(fileName);
                 if (ModelState.IsValid)
