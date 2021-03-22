@@ -1,0 +1,75 @@
+﻿@model PagedList.IPagedList<DAL.EF.Product>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container-fluid">
+
+    @Html.ActionLink("Create new product", "Create", FormMethod.Get)
+    <!-- Page Heading -->
+    @using (Html.BeginForm("Index", "Product", FormMethod.Post))
+    {
+        <h1 class="h3 mb-2 text-gray-800">Search</h1>
+        <input type="text" value="@ViewBag.Search" name="txtSearch" placeholder="Search...." />
+
+        <button type="submit">Search</button>
+    }
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <h2>List of Products</h2>
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Day Create</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                            <th>Brannd</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr id="row_@item.productID">
+                                <td>@item.productID</td>
+                                <td>@item.productName</td>
+                                <td><img src="@Url.Content(item.imageLink)" class="rounded-circle" height="80" width="80" asp-append-version="true" /></td>
+                                <td>@item.price</td>
+                                <td>@item.quantity</td>
+                                <td>@item.dayCreated</td>
+                                <td>@item.description</td>
+                                <td>@item.status</td>
+                                <td>@item.brandID</td>
+                                <td>
+                                    <a href="/Admin/Product/Edit/@item.productID">Update</a>
+                                </td>
+                                <td>
+                                    <a href="/Admin/Product/Delete/@item.productID">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @txtSearch = @ViewBag.Search }))
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
