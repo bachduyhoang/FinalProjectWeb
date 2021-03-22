@@ -77,7 +77,8 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
                     }
                 }
                 return View("Index");
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return View();
             }
@@ -98,16 +99,9 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
             try
             {
                 var iplProduct = new UserBLL();
-                var res = iplProduct.DeleteUser(id);
-                if (res)
-                {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Delete Fail!");
-                    return View("Index");
-                }
+                iplProduct.DeleteUser(id);
+                return RedirectToAction("Index");
+
             }
             catch
             {

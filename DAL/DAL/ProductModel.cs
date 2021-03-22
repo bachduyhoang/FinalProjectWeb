@@ -12,7 +12,6 @@ namespace DAL.DAL
     public class ProductModel
     {
         DBContext context = null;
-        string strConnection = @"server=SE140695\SQLEXPRESS;database=ProjectTGDD;uid=sa;pwd=123";
 
         public ProductModel()
         {
@@ -106,62 +105,16 @@ namespace DAL.DAL
             return context.Products.Find(id);
         }
 
-        public int GetIDProduct()
+        public int GetMaxID()
         {
-            int result = 0;
-            SqlConnection cnn = new SqlConnection(strConnection);
-            string SQL = "select top 1 productID " +
-                           "from Products " +
-                           "order by productID desc";
-            SqlCommand cmd = new SqlCommand(SQL, cnn);
-
-            try
-            {
-                if (cnn.State == System.Data.ConnectionState.Closed)
-                {
-                    cnn.Open();
-                }
-                SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
-                {
-                    result = int.Parse(reader[0].ToString());
-                }
-
-            }
-            catch (Exception se)
-            {
-                throw new Exception(se.Message);
-            }
-            finally
-            {
-                cnn.Close();
-            }
-
-            return result;
+            var result = context.Products.OrderByDescending(x => x.productID).FirstOrDefault();
+            return result.productID;
         }
-
-        public bool Delete(int id)
+        public void Delete(int id)
         {
-            try
-            {
-                bool check;
-                SqlConnection cnn = new SqlConnection(strConnection);
-                string SQL = "update Products " +
-                            "set status = 0 " +
-                            "where productID = @ID";
-                SqlCommand cmd = new SqlCommand(SQL, cnn);
-                cmd.Parameters.AddWithValue("@ID", id);
-                if (cnn.State == System.Data.ConnectionState.Closed)
-                {
-                    cnn.Open();
-                }
-                check = cmd.ExecuteNonQuery() > 0;
-                return check;
-            }
-            catch (Exception se)
-            {
-                return false;
-            }
+            var product = context.Products.Find(id);
+            product.status = false;
+            context.SaveChanges();
         }
     }
 }

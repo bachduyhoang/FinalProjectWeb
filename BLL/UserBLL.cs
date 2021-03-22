@@ -26,9 +26,9 @@ namespace BLL
             return model.Update(u);
         }
 
-        public bool DeleteUser(string id)
+        public void DeleteUser(string id)
         {
-            return model.Delete(id);
+            model.Delete(id);
         }
     }
 }
