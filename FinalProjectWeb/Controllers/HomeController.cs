@@ -80,5 +80,12 @@ namespace FinalProjectWeb.Controllers
             }
             return PartialView(list);
         }
+
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Login", "Account");
+        }
+
     }
 }

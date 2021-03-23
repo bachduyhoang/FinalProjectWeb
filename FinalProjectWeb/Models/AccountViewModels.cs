@@ -49,9 +49,8 @@ namespace FinalProjectWeb.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "UserID")]
+        public string UserID { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -64,6 +63,16 @@ namespace FinalProjectWeb.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "User ID")]
+        public string UserID { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -80,7 +89,6 @@ namespace FinalProjectWeb.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
-
     public class ResetPasswordViewModel
     {
         [Required]

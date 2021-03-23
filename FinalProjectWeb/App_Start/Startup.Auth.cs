@@ -58,11 +58,11 @@ namespace FinalProjectWeb
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "527999131775-158ct565ul855hdquhqld5877op8acl8.apps.googleusercontent.com",
+                ClientSecret = "2WA2_QliS17KRevRNIsOd40T"
+            });
         }
     }
 }

@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountBLL.cs" />
     <Compile Include="BLL\ActivityLogBLL.cs" />
     <Compile Include="BLL\DiscountCodeBLL.cs" />
     <Compile Include="BLL\OderDetailDTO.cs" />
