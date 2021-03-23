@@ -47,15 +47,9 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
+                        
                         <li>
-                            <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            @Html.ActionLink("LogOut", "Logout", "User")
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -77,9 +71,9 @@
     </div>
     <!-- /#wrapper -->
     <!-- Core Scripts - Include with every page -->
-    <script src="/Assert/Admin/js/jquery-1.10.2.js"></script>
-    <script src="/Assert/Admin/js/bootstrap.min.js"></script>
-    <script src="/Assert/Admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/Asserts/Admin/js/jquery-1.10.2.js"></script>
+    <script src="/Asserts/Admin/js/bootstrap.min.js"></script>
+    <script src="/Asserts/Admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
     <!-- Page-Level Plugin Scripts - Dashboard -->
     <script src="/Asserts/Admin/js/plugins/morris/raphael-2.1.0.min.js"></script>
