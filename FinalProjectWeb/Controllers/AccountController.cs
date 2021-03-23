@@ -10,6 +10,7 @@ using FinalProjectWeb.Models;
 using System.Net;
 using Newtonsoft.Json.Linq;
 using BLL;
+using DAL.DAL;
 
 namespace FinalProjectWeb.Controllers
 {
@@ -88,7 +89,15 @@ namespace FinalProjectWeb.Controllers
                 var user = account.checkUser(model.UserID, model.Password);
                 if (user != null && status)
                 {
-                    return RedirectToLocal(returnUrl);
+                    Session["User"] = user;
+                    if (user.roleID.Equals("ad"))
+                    {
+                        return RedirectToAction("Index", "User", new { area = "Admin" });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index","Home");
+                    }
                 }
                 else
                 {
@@ -374,6 +383,7 @@ namespace FinalProjectWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
+            UserModel dao = new UserModel();
             var userDetails = account.checkInfo(model.Email);
 
             if (userDetails == null)
@@ -385,6 +395,7 @@ namespace FinalProjectWeb.Controllers
                 account.register(model.Email, arrListStr[0], model.Email, null);
 
             }
+            Session["User"] = dao.GetUserByEmail(model.Email);
             return RedirectToAction("Index", "Home");
         }
 
