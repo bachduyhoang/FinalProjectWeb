@@ -11,7 +11,7 @@ using System.Web.Security;
 
 namespace FinalProjectWeb.Areas.Admin.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
         // GET: Admin/Product
         public ActionResult Index(string txtSearch, int page = 1, int size = 5)
