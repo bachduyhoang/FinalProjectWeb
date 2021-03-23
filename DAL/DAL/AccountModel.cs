@@ -1,31 +1,36 @@
-﻿using System;
+﻿using DAL.EF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL.EF;
 
-namespace DAL.DAL
+namespace DAL
 {
-    
     public class AccountModel
     {
-        ProjectTGDD dbmodel = new ProjectTGDD();
+        DBContext context = null;
+
+        public AccountModel()
+        {
+            context = new DBContext();
+        }
+
         public User checkUser(string userID, string password)
         {
-            var user = dbmodel.Users.Where(x => x.userID == userID && x.password == password && x.status == true).Single();
+            var user = context.Users.Where(x => x.userID == userID && x.password == password && x.status == true).Single();
             return user;
         }
 
         public User checkInfo(string userID)
         {
-            var userDetails = dbmodel.Users.Where(x => x.userID == userID).FirstOrDefault();
+            var userDetails = context.Users.Where(x => x.userID == userID).FirstOrDefault();
             return userDetails;
         }
 
         public User checkEmail(string email)
         {
-            var emailDetails = dbmodel.Users.Where(x => x.email == email).FirstOrDefault();
+            var emailDetails = context.Users.Where(x => x.email == email).FirstOrDefault();
             return emailDetails;
         }
 
@@ -39,8 +44,8 @@ namespace DAL.DAL
             userModel.roleID = "us";
             userModel.status = true;
             userModel.dateCreated = DateTime.Now;
-            dbmodel.Users.Add(userModel);
-            dbmodel.SaveChanges();
+            context.Users.Add(userModel);
+            context.SaveChanges();
         }
     }
 }
