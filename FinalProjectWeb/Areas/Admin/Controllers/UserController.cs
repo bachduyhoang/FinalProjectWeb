@@ -112,7 +112,7 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
         public ActionResult Logout()
         {
             Session.Clear();
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Login", "Account", new { area = "" });
         }
 
     }
