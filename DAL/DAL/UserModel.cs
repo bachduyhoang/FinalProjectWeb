@@ -57,5 +57,17 @@ namespace DAL.DAL
             user.status = false;
             context.SaveChanges();
         }
+
+        public User GetUser(string id, string password)
+        {
+            var user = context.Users.SingleOrDefault(x => x.userID == id && x.password == password && x.status == true);
+            return user;
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            var user = context.Users.SingleOrDefault(x => x.userID == email && x.status == true);
+            return user;
+        }
     }
 }

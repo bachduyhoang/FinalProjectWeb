@@ -30,5 +30,9 @@ namespace BLL
         {
             model.Delete(id);
         }
+        public User GetUser(string id, string password)
+        {
+            return model.GetUser(id, password);
+        }
     }
 }
