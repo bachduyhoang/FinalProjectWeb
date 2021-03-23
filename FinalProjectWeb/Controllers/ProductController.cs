@@ -1,5 +1,6 @@
 ﻿
 using BLL;
+using DAL.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,10 @@ namespace FinalProjectWeb.Controllers
         public ActionResult Detail(int id)
         {
             ProductBLL dao = new ProductBLL();
-            var p = dao.GetProduct(id);
+            Product p = dao.GetProduct(id);
+            int total = 0;
+            ViewBag.ListRelated = dao.GetListOfBrand(p.brandID, ref total);
+            ViewBag.Category = p.brandID;
             return View(p);
         }
 
