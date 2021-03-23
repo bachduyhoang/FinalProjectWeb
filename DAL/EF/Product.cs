@@ -41,12 +41,15 @@ namespace DAL.EF
 
         public int? quantity { get; set; }
 
+        [DisplayName("Create Date")]
         public DateTime? dayCreated { get; set; }
 
         [StringLength(100)]
         [DisplayName("Product Description")]
 
         public string description { get; set; }
+
+        [DisplayName("Status")]
 
         public bool? status { get; set; }
 

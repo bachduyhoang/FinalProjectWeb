@@ -8,6 +8,7 @@ using BLL;
 using DAL.EF;
 using DAL.DAL;
 using System.Web.Security;
+using System.Configuration;
 
 namespace FinalProjectWeb.Areas.Admin.Controllers
 {
@@ -50,8 +51,8 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
                 string fileName = Path.GetFileNameWithoutExtension(product.imageFile.FileName);
                 string extension = Path.GetExtension(product.imageFile.FileName);
                 fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                product.imageLink = "~/Areas/Image/" + fileName;
-                fileName = Path.Combine(Server.MapPath("~/Areas/Image/"), fileName);
+                product.imageLink = ConfigurationManager.AppSettings.Get("SaveImageProduct") + fileName;
+                fileName = Path.Combine(Server.MapPath(ConfigurationManager.AppSettings.Get("SaveImageProduct")), fileName);
                 product.imageFile.SaveAs(fileName);
                 if (ModelState.IsValid)
                 {
@@ -103,8 +104,8 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
             string fileName = Path.GetFileNameWithoutExtension(p.imageFile.FileName);
             string extension = Path.GetExtension(p.imageFile.FileName);
             fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-            p.imageLink = "~/Areas/Image/" + fileName;
-            fileName = Path.Combine(Server.MapPath("~/Areas/Image/"), fileName);
+            p.imageLink = ConfigurationManager.AppSettings.Get("SaveImageProduct") + fileName;
+            fileName = Path.Combine(Server.MapPath(ConfigurationManager.AppSettings.Get("SaveImageProduct")), fileName);
             p.imageFile.SaveAs(fileName);
             if (ModelState.IsValid)
             {
