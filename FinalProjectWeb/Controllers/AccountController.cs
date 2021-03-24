@@ -356,7 +356,7 @@ namespace FinalProjectWeb.Controllers
                 String name = loginInfo.Email;
                 string[] arrListStr = name.Split('@');
 
-                account.register(loginInfo.Email, arrListStr[0], loginInfo.Email, null);
+                account.registerEmail(loginInfo.Email, arrListStr[0], loginInfo.Email, null);
                 return RedirectToAction("Index", "Home");
                 //ViewBag.ReturnUrl = returnUrl;
                 //ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
