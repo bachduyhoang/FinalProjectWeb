@@ -30,5 +30,10 @@ namespace BLL
         {
             model.register(userID, fullName, email, password);
         }
+
+        public void registerEmail(string userID, string fullName, string email, string password)
+        {
+            model.registerEmail(userID, fullName, email, password);
+        }
     }
 }

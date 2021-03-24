@@ -369,7 +369,6 @@ namespace FinalProjectWeb.Controllers
                 string[] arrListStr = name.Split('@');
 
                 account.register(loginInfo.Email, arrListStr[0], loginInfo.Email, null);
-                Session["User"] = dao.GetUserByEmail(loginInfo.Email);
                 return RedirectToAction("Index", "Home");
                 //ViewBag.ReturnUrl = returnUrl;
                 //ViewBag.LoginProvider = loginInfo.Login.LoginProvider;

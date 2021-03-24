@@ -22,13 +22,13 @@
     @Html.HiddenFor(model => model.discountID)
     <div class="form-group">
         @Html.LabelFor(model => model.discountID, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="col-md-5">
             @Html.TextBoxFor(model => model.discountID, new { @class = "form-control", @Value=Model.discountID, @ReadOnly = "true" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(model => model.discountPercent, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="col-md-5">
             @Html.TextBoxFor(model => model.discountPercent, new { @class = "form-control", @Min = "1", @Max = "100" })
             @Html.ValidationMessageFor(model => model.discountPercent, "", new { @class = "text-danger" })
         </div>
@@ -36,7 +36,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.dayCreated, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="col-md-5">
             @Html.TextBoxFor(model => model.dayCreated, new { @class = "form-control", @ReadOnly = "true" })
             @Html.ValidationMessageFor(model => model.dayCreated, "", new { @class = "text-danger" })
         </div>
@@ -44,7 +44,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.expiry, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="col-md-5">
             @Model.expiry
             @Html.TextBoxFor(model => model.expiry, new { @class = "form-control", @Type = "date", @Id = "datefield", @Min = "" , @Value=experyDate})
             @Html.ValidationMessageFor(model => model.expiry, "", new { @class = "text-danger" })
