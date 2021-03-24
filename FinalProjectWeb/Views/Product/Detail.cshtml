@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
     List<DAL.EF.Product> list = ViewBag.ListRelated;
     string brand = ViewBag.Category;
+    int size = ViewBag.Size;
 }
 
 <div class="main">
@@ -85,7 +86,7 @@
                     <div class="clear"></div>
                 </div>
                 <div class="section group">
-                    @for (var i = 0; i < 4; i++)
+                    @for (var i = 0; i < size; i++)
                     {
                     <div class="grid_1_of_4 images_1_of_4">
                         <a href="/product/detail-@list[i].productID"><img src="@list[i].imageLink" alt=""></a>
