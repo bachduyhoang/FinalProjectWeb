@@ -18,6 +18,11 @@ namespace FinalProjectWeb.Controllers
             Product p = dao.GetProduct(id);
             int total = 0;
             ViewBag.ListRelated = dao.GetListOfBrand(p.brandID, ref total);
+            if(total > 4)
+            {
+                total = 4;
+            }
+            ViewBag.Size = total;
             ViewBag.Category = p.brandID;
             return View(p);
         }

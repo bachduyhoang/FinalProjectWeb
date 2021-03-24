@@ -56,6 +56,9 @@ namespace DAL.DAL
         public void InsertOrderDetail(OrderDetail orderDetail)
         {
             db.OrderDetails.Add(orderDetail);
+            var product = db.Products.Find(orderDetail.productID);
+            var quantity = product.quantity - orderDetail.quantity;
+            product.quantity = quantity;
             db.SaveChanges();
         }
     }
