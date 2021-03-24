@@ -19,7 +19,7 @@ namespace DAL
 
         public User checkUser(string userID, string password)
         {
-            var user = context.Users.Where(x => x.userID == userID && x.password == password && x.status == true).Single();
+            var user = context.Users.FirstOrDefault(x => x.userID == userID && x.password == password && x.status == true);
             return user;
         }
 
@@ -31,7 +31,7 @@ namespace DAL
 
         public User checkEmail(string email)
         {
-            var emailDetails = context.Users.Where(x => x.email == email).FirstOrDefault();
+            var emailDetails = context.Users.FirstOrDefault(x => x.email == email);
             return emailDetails;
         }
 
