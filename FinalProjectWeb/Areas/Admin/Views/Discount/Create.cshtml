@@ -19,7 +19,7 @@
     
     <div class="form-group">
         @Html.LabelFor(model => model.discountID, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="col-md-5">
             @Html.TextBoxFor(model => model.discountID, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.discountID, "", new { @class = "text-danger" })
         </div>
@@ -27,7 +27,7 @@
     
     <div class="form-group">
         @Html.LabelFor(model => model.discountPercent, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="col-md-5">
             @Html.TextBoxFor(model => model.discountPercent, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.discountPercent, "", new { @class = "text-danger" })
         </div>
@@ -35,7 +35,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.expiry, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="col-md-5">
             @Html.TextBoxFor(model => model.expiry, new { @class = "form-control", @Type = "date" , @Id= "datefield" , @Min=""})
             @Html.ValidationMessageFor(model => model.expiry, "", new { @class = "text-danger" })
         </div>

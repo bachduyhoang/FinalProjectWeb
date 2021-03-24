@@ -110,7 +110,13 @@ namespace FinalProjectWeb.Controllers
             List<CartModels> listInvalid = new List<CartModels>();
             bool check = true;
             float totalBill = 0;
-            if (cart != null)
+            User user = (User)Session["User"];
+            if(user == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            if (cart != null && user != null)
             {
                 ProductBLL dao = new ProductBLL();
                 foreach (var item in cart)
@@ -128,7 +134,7 @@ namespace FinalProjectWeb.Controllers
                 if (check)
                 {
                     Order o = new Order { date = DateTime.Now,
-                        userID = "hoang",
+                        userID = user.userID,
                         total = totalBill
                     };
                     int id = dao.InsertOrder(o);

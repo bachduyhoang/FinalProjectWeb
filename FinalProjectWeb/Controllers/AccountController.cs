@@ -10,6 +10,7 @@ using FinalProjectWeb.Models;
 using System.Net;
 using Newtonsoft.Json.Linq;
 using BLL;
+using DAL.DAL;
 
 namespace FinalProjectWeb.Controllers
 {
@@ -88,7 +89,15 @@ namespace FinalProjectWeb.Controllers
                 var user = account.checkUser(model.UserID, model.Password);
                 if (user != null && status)
                 {
-                    return RedirectToLocal(returnUrl);
+                    Session["User"] = user;
+                    if (user.roleID.Equals("ad"))
+                    {
+                        return RedirectToAction("Index", "User", new { area = "Admin" });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index","Home");
+                    }
                 }
                 else
                 {
@@ -349,14 +358,17 @@ namespace FinalProjectWeb.Controllers
 
             if (userDetails != null)
             {
+                UserModel dao = new UserModel();
+                Session["User"] = dao.GetUserByEmail(loginInfo.Email);
                 return RedirectToAction("Index", "Home");
             }
             else
             {
+                UserModel dao = new UserModel();
                 String name = loginInfo.Email;
                 string[] arrListStr = name.Split('@');
 
-                account.registerEmail(loginInfo.Email, arrListStr[0], loginInfo.Email, null);
+                account.register(loginInfo.Email, arrListStr[0], loginInfo.Email, null);
                 return RedirectToAction("Index", "Home");
                 //ViewBag.ReturnUrl = returnUrl;
                 //ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
@@ -374,6 +386,7 @@ namespace FinalProjectWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
+            UserModel dao = new UserModel();
             var userDetails = account.checkInfo(model.Email);
 
             if (userDetails == null)
@@ -385,6 +398,7 @@ namespace FinalProjectWeb.Controllers
                 account.register(model.Email, arrListStr[0], model.Email, null);
 
             }
+            Session["User"] = dao.GetUserByEmail(model.Email);
             return RedirectToAction("Index", "Home");
         }
 
