@@ -1,7 +1,7 @@
-﻿
-@model PagedList.IPagedList<DAL.EF.User>
+﻿@model PagedList.IPagedList<DAL.EF.User>
 @using PagedList.Mvc
- 
+
+@*@model FinalProjectWeb.Areas.Admin.Models.UserModel*@
 
 @{
     ViewBag.Title = "Index";
@@ -14,7 +14,7 @@
     {
         <h1 class="h3 mb-2 text-gray-800">Search</h1>
         <input type="text" value="@ViewBag.Search" name="txtSearch" placeholder="Search...." />
-
+        <input type="hidden" value="1" name="currentPage" />
         <button type="submit">Search</button>
     }
 
@@ -22,7 +22,7 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
-                <h2>List of Products</h2>
+                <h2>List of Users</h2>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
@@ -49,10 +49,17 @@
                                 <td>@item.roleID</td>
                                 <td>@item.email</td>
                                 <td>
-                                    <a href="/Admin/User/Edit/@item.userID">Update</a>
+                                    <a href="/Admin/User/Edit?id=@item.userID">Update</a>
                                 </td>
                                 <td>
-                                    <a href="/Admin/User/Delete/@item.userID">Delete</a>
+                                    @if (item.status == true)
+                                    {
+                                        <a href="/Admin/User/Delete?id=@item.userID" onclick="return confirm('Are you sure to delete it?')">Delete</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Admin/User/Delete?id=@item.userID">Restore</a>
+                                    }
                                 </td>
                             </tr>
                         }

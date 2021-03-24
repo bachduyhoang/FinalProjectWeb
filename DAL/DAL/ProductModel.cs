@@ -113,7 +113,15 @@ namespace DAL.DAL
         public void Delete(int id)
         {
             var product = context.Products.Find(id);
-            product.status = false;
+            if (product.status == true)
+            {
+                product.status = false;
+            }
+            else
+            {
+                product.status = true;
+
+            }
             context.SaveChanges();
         }
     }

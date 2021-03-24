@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using BLL;
 using DAL.EF;
 using System.Web.Security;
-
+using FinalProjectWeb.Areas.Admin.Models;
 
 namespace FinalProjectWeb.Areas.Admin.Controllers
 {
@@ -19,6 +19,12 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
             ViewBag.Search = txtSearch;
             var model = iplProduct.GetListPaging(txtSearch, page, size);
             return View(model);
+
+            //UserModel model = new UserModel();
+            //model.list = iplProduct.GetList(1, "");
+            //model.currentPage = 1;
+            //model.totalPage = iplProduct.CountPage("");
+            //return View(model);
         }
 
         // GET: Admin/User/Details/5
@@ -87,27 +93,37 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
         // GET: Admin/User/Delete/5
         public ActionResult Delete(string id)
         {
-            var iplProduct = new UserBLL();
-            User u = iplProduct.GetUserByID(id);
-            return View(u);
-        }
-
-        // POST: Admin/User/Delete/5
-        [HttpPost]
-        public ActionResult Delete(string id, User u)
-        {
+            //var iplProduct = new UserBLL();
+            //User u = iplProduct.GetUserByID(id);
+            //return View(u);
             try
             {
                 var iplProduct = new UserBLL();
                 iplProduct.DeleteUser(id);
                 return RedirectToAction("Index");
-
             }
             catch
             {
                 return View();
             }
         }
+
+        // POST: Admin/User/Delete/5
+        //[HttpPost]
+        //public ActionResult Delete(string id, string ii)
+        //{
+        //    try
+        //    {
+        //        var iplProduct = new UserBLL();
+        //        iplProduct.DeleteUser(id);
+        //        return RedirectToAction("Index");
+
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
         public ActionResult Logout()
         {

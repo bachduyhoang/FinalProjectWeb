@@ -11,7 +11,7 @@ using System.Web.Security;
 
 namespace FinalProjectWeb.Areas.Admin.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
         // GET: Admin/Product
         public ActionResult Index(string txtSearch, int page = 1, int size = 5)
@@ -90,9 +90,16 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
         }
         public ActionResult Delete(int id)
         {
-            var iplProduct = new ProductBLL();
-            Product p = iplProduct.GetProductById(id);
-            return View(p);
+            try
+            {
+                var iplProduct = new ProductBLL();
+                iplProduct.DeleteProduct(id);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         // POST: Admin/Product/Edit/5
@@ -124,19 +131,5 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
         }
 
         // POST: Admin/Product/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, Product p)
-        {
-            try
-            {
-                var iplProduct = new ProductBLL();
-                iplProduct.DeleteProduct(id);
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

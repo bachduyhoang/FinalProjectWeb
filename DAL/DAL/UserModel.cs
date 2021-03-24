@@ -28,6 +28,28 @@ namespace DAL.DAL
             return model.Where(x => x.roleID != "ad").OrderByDescending(x => x.dateCreated).ToPagedList(page, size);
         }
 
+        //public List<User> GetList(int currentPage, string SearchWord)
+        //{
+        //    int size = 5;
+        //    var list = context.Users.OrderBy(x => x.userID).Where(x => x.userID.Contains(SearchWord)).Skip((currentPage - 1) * size).Take(size).ToList();
+        //    return list;
+        //}
+        //public int CountPage(string SearchWord)
+        //{
+        //    int size = 5;
+        //    int totalPage = 0;
+        //    int totalRow = context.Users.Where(x => x.userID.Contains(SearchWord)).Count();
+        //    if (totalRow % size > 0)
+        //    {
+        //        totalPage = totalRow / size + 1;
+        //    }
+        //    else
+        //    {
+        //        totalPage = totalRow / size;
+        //    }
+        //    return totalPage;
+        //}
+
         public User GetUserById(string id)
         {
             return context.Users.Find(id);
@@ -54,7 +76,14 @@ namespace DAL.DAL
         public void Delete(string id)
         {
             var user = context.Users.Find(id);
-            user.status = false;
+            if (user.status == true)
+            {
+                user.status = false;
+            }
+            else
+            {
+                user.status = true;
+            }
             context.SaveChanges();
         }
 

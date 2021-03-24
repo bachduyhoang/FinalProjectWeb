@@ -15,6 +15,15 @@ namespace BLL
         {
             return model.GetListPaging(txtSearch, page, size);
         }
+        //public List<User> GetList(int currentPage, string SearchWord)
+        //{
+        //    return model.GetList(currentPage, SearchWord);
+        //}
+
+        //public int CountPage(string SearchWord)
+        //{
+        //    return model.CountPage(SearchWord);
+        //}
 
         public User GetUserByID(string id)
         {

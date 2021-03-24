@@ -25,7 +25,6 @@ namespace DAL.EF
         public string fullName { get; set; }
 
         [DisplayName("Password")]
-        [Required]
         public string password { get; set; }
 
         [DisplayName("Status")]
