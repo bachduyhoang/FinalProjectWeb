@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace FinalProjectWeb.Areas.Admin.Controllers
 {
-    public class ActivityLogController : BaseController
+    public class ActivityLogController : Controller
     {
         // GET: Admin/ActivityLog
         public ActionResult Index()

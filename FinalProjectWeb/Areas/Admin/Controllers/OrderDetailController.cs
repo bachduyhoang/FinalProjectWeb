@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace FinalProjectWeb.Areas.Admin.Controllers
 {
-    public class OrderDetailController : BaseController
+    public class OrderDetailController : Controller
     {
         // GET: Admin/OrderDetail
         public ActionResult Index()

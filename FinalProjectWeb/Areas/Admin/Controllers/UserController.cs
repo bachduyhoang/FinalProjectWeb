@@ -10,7 +10,7 @@ using System.Web.Security;
 
 namespace FinalProjectWeb.Areas.Admin.Controllers
 {
-    public class UserController : BaseController
+    public class UserController : Controller
     {
         // GET: Admin/User
         public ActionResult Index(string txtSearch, int page = 1, int size = 5)

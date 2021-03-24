@@ -9,18 +9,14 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
 {
     public class BaseController : Controller
     {
-
-        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            User user = (User) Session["User"];
-            if(user != null)
+            var user = (User) Session["User"];
+            if (user == null || "us".Equals(user.roleID))
             {
-                if ("us".Equals(user.roleID))
-                {
-                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Home", action = "Index" }));
-                }
+                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Account", action = "Login"}));
             }
-            base.OnActionExecuted(filterContext);
+            base.OnActionExecuting(filterContext);
         }
     }
 }

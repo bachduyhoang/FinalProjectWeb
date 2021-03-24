@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace FinalProjectWeb.Areas.Admin.Controllers
 {
-    public class DiscountController : BaseController
+    public class DiscountController : Controller
     {
         // GET: Admin/Discount
         public ActionResult Index()
