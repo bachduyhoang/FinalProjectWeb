@@ -1,11 +1,11 @@
-﻿
-@model PagedList.IPagedList<DAL.EF.User>
-@using PagedList.Mvc
+﻿@model List<DAL.EF.User>
+
  
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    List<string>listPage = ViewBag.ListPage;
 }
 
 <div class="container-fluid">
@@ -58,7 +58,41 @@
                         }
                     </tbody>
                 </table>
-                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @txtSearch = @ViewBag.Search }))
+                <!--Paging-->
+                @if (ViewBag.TotalPage > 1)
+                {
+                    int totalPage = (int)ViewBag.TotalPage;
+                    int currentPage = ViewBag.Index;
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            @if (currentPage > ViewBag.First)
+                            {
+                                <li class="page-item"><a class="page-link" href="/Admin/User/Index?txtSearch=@ViewBag.Search&index=@ViewBag.First">First</a></li>
+                                <li class="page-item"><a class="page-link" href="/Admin/User/Index?txtSearch=@ViewBag.Search&index=@ViewBag.Prev">Previous</a></li>
+                            }
+                            <li class="page-item"><a a class="page-link " href="/Admin/User/Index?txtSearch=@ViewBag.Search&index=@ViewBag.First">@ViewBag.First</a></li>
+                            @foreach (var item in listPage)
+                            {
+                                if (item.Equals(currentPage.ToString()))
+                                {
+                                    <li class="page-item active"><a a class="page-link " href="/Admin/User/Index?txtSearch=@ViewBag.Search&index=@item.ToString()">@item.ToString()</a></li>
+                                }
+                                else
+                                {
+                                    <li class="page-item"><a a class="page-link" href="/Admin/User/Index?txtSearch=@ViewBag.Search&index=@item.ToString()">@item.ToString()</a></li>
+                                }
+                            }
+                            <li class="page-item"><a a class="page-link " href="/Admin/User/Index?txtSearch=@ViewBag.Search&index=@ViewBag.Last">@ViewBag.Last</a></li>
+                            @if (currentPage < totalPage)
+                            {
+                                <li class="page-item"><a class="page-link" href="/Admin/User/Index?txtSearch=@ViewBag.Search&index=@ViewBag.Next">Next</a></li>
+                                <li class="page-item"><a class="page-link" href="/Admin/User/Index?txtSearch=@ViewBag.Search&index=@ViewBag.Last">Last</a></li>
+                            }
+
+
+                        </ul>
+                    </nav>
+                }
             </div>
         </div>
     </div>

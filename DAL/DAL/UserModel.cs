@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.EF;
-using PagedList;
 
 namespace DAL.DAL
 {
@@ -13,19 +12,27 @@ namespace DAL.DAL
     {
         DBContext context = null;
 
+
         public UserModel()
         {
             context = new DBContext();
         }
 
-        public IEnumerable<User> GetListPaging(string txtSearch, int page, int size)
+        public List<User> GetListPagingByHand(string txtSearch, ref int totalPage, int index=1, int size = 20)
         {
-            IQueryable<User> model = context.Users;
-            if (!string.IsNullOrEmpty(txtSearch))
+            List<User> list = new List<User>();
+            if (string.IsNullOrEmpty(txtSearch))
             {
-                model = model.Where(x => x.fullName.Contains(txtSearch) && x.roleID != "ad");
+                txtSearch = "";
             }
-            return model.Where(x => x.roleID != "ad").OrderByDescending(x => x.dateCreated).ToPagedList(page, size);
+            totalPage = user.Count;
+            if ((totalPage % 20) != 0)
+            {
+                totalPage++;
+            }
+            list = context.Users.OrderBy(x => x.dateCreated).Skip((index - 1) * size).Take(size).ToList();
+
+            return list;
         }
 
         public User GetUserById(string id)
@@ -68,6 +75,54 @@ namespace DAL.DAL
         {
             var user = context.Users.SingleOrDefault(x => x.userID == email && x.status == true);
             return user;
+        }
+
+        public List<string> Paging(int index, int max)
+        {
+            int current = index,
+                last = max,
+                delta = 5,
+                left = current - delta,
+                right = current + delta + 1 ;
+
+            List<string> range = new List<string>() ;
+
+            if (current <= (delta + 1))
+            {
+                for (var i = 2; i <= last; i++)
+                {
+                    if (i < (delta * 2 + 1))
+                    {
+                        range.Add(i.ToString());
+                    }
+                }
+                range.Add("...");
+            }
+            else if (current >= (last - delta))
+            {
+                range.Add("...");
+                for (var i = 2; i <= last; i++)
+                {
+                    if (i < last && i > last - 2 * delta)
+                    {
+                        range.Add(i.ToString());
+                    }
+                }
+            }
+            else
+            {
+                range.Add("...");
+                for (var i = 2; i <= last; i++)
+                {
+                    if (i > left && i < right)
+                    {
+                        range.Add(i.ToString());
+                    }
+                }
+                range.Add("...");
+            }
+
+            return range;
         }
     }
 }

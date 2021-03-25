@@ -11,10 +11,6 @@ namespace BLL
     public class UserBLL
     {
         UserModel model = new UserModel();
-        public IEnumerable<User> GetListPaging(string txtSearch, int page, int size)
-        {
-            return model.GetListPaging(txtSearch, page, size);
-        }
 
         public User GetUserByID(string id)
         {
@@ -33,6 +29,16 @@ namespace BLL
         public User GetUser(string id, string password)
         {
             return model.GetUser(id, password);
+        }
+
+        public List<User> GetListPagingHand(string txtSearch, ref int totalPage, int index)
+        {
+            return model.GetListPagingByHand(txtSearch, ref totalPage, index);
+        }
+
+        public List<string> Paging(int index, int max)
+        {
+            return model.Paging(index, max);
         }
     }
 }

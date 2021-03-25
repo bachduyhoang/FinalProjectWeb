@@ -13,11 +13,21 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
     public class UserController : Controller
     {
         // GET: Admin/User
-        public ActionResult Index(string txtSearch, int page = 1, int size = 5)
+        public ActionResult Index(string txtSearch, int index = 1)
         {
             var iplProduct = new UserBLL();
             ViewBag.Search = txtSearch;
-            var model = iplProduct.GetListPaging(txtSearch, page, size);
+            int totalPage = 0;
+            var model = iplProduct.GetListPagingHand(txtSearch,ref totalPage, index);
+            List<string> listPage = iplProduct.Paging(index, totalPage);
+            ViewBag.TotalPage = totalPage;
+            ViewBag.Index = index;
+            ViewBag.First = 1;
+            ViewBag.Last = totalPage;
+            ViewBag.Next = index + 1;
+            ViewBag.Prev = index - 1;
+            ViewBag.ListPage = listPage;
+
             return View(model);
         }
 
