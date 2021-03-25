@@ -11,10 +11,10 @@ namespace BLL
     public class UserBLL
     {
         UserModel model = new UserModel();
-        public IEnumerable<User> GetListPaging(string txtSearch, int page, int size)
-        {
-            return model.GetListPaging(txtSearch, page, size);
-        }
+        //public IEnumerable<User> GetListPaging(string txtSearch, int page, int size)
+        //{
+        //    return model.GetListPaging(txtSearch, page, size);
+        //}
         //public List<User> GetList(int currentPage, string SearchWord)
         //{
         //    return model.GetList(currentPage, SearchWord);
