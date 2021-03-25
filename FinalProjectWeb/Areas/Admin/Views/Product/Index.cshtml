@@ -56,7 +56,14 @@
                                     <a href="/Admin/Product/Edit/@item.productID">Update</a>
                                 </td>
                                 <td>
-                                    <a href="/Admin/Product/Delete/@item.productID">Delete</a>
+                                    @if (item.status == true)
+                                    {
+                                        <a href="/Admin/Product/Delete?id=@item.productID" onclick="return confirm('Are you sure to delete it?')">Delete</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Admin/Product/Delete?id=@item.productID">Restore</a>
+                                    }
                                 </td>
                             </tr>
                         }

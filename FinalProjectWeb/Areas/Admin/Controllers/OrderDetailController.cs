@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace FinalProjectWeb.Areas.Admin.Controllers
 {
-    public class OrderDetailController : Controller
+    public class OrderDetailController : BaseController
     {
         // GET: Admin/OrderDetail
         public ActionResult Index()
@@ -36,7 +36,6 @@ namespace FinalProjectWeb.Areas.Admin.Controllers
             model.list = bll.GetList(model.currentPage, model.searchWord);
             model.totalPage = bll.CountPage(model.searchWord);
             return View(model);
-
         }
         [HttpPost]
         public ActionResult Detail(OrderModel model)
