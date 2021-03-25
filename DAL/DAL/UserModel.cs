@@ -25,7 +25,7 @@ namespace DAL.DAL
             {
                 txtSearch = "";
             }
-            totalPage = user.Count;
+            totalPage = context.Users.OrderBy(x => x.dateCreated).Count();
             if ((totalPage % 20) != 0)
             {
                 totalPage++;

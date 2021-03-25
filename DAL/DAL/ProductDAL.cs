@@ -36,7 +36,10 @@ namespace DAL.DAL
             totalRecord = db.Products.Where(x => x.productName.Contains(name)).Count();
             return db.Products.Where(x => x.productName.Contains(name)).OrderBy(x => x.quantity).Skip((index - 1) * maxPage).Take(maxPage).ToList();
         }
-
+        public List<string> GetListAll(string name)
+        {
+            return db.Products.Where(x => x.productName.Contains(name)).Select(x =>x.productName).ToList();
+        }
         public Product GetProduct(int id)
         {
             return db.Products.Find(id);

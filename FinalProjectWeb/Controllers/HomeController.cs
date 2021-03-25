@@ -33,6 +33,19 @@ namespace FinalProjectWeb.Controllers
             return View(listName);
         }
 
+
+        public JsonResult ListName(string q)
+        {
+            ProductBLL dao = new ProductBLL();
+            var list = dao.GetListAll(q);
+
+            return Json(new
+            {
+                data = list,
+                status = true
+            }, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult About()
         {
             return View();

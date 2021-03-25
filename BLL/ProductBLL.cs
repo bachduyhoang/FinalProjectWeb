@@ -43,6 +43,11 @@ namespace BLL
             return p.GetListAllProduct(name, ref totalRecord, index, maxPage);
         }
 
+        public List<string> GetListAll(string name)
+        {
+            return p.GetListAll(name);
+        }
+
         public int GetMaxQuantity(int id)
         {
             return p.GetMaxQuantity(id);

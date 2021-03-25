@@ -233,6 +233,7 @@
     <Content Include="Asserts\Admin\js\sb-admin.js" />
     <Content Include="Asserts\User\css\easy-responsive-tabs.css" />
     <Content Include="Asserts\User\css\global.css" />
+    <Content Include="Asserts\User\css\jquery-ui.css" />
     <Content Include="Asserts\User\css\main.css" />
     <Content Include="Asserts\User\css\slider.css" />
     <Content Include="Asserts\User\css\style.css" />
@@ -301,7 +302,9 @@
     <Content Include="Asserts\User\js\CartController.js" />
     <Content Include="Asserts\User\js\easing.js" />
     <Content Include="Asserts\User\js\easyResponsiveTabs.js" />
+    <Content Include="Asserts\User\js\jquery-1.12.4.js" />
     <Content Include="Asserts\User\js\jquery-1.7.2.min.js" />
+    <Content Include="Asserts\User\js\jquery-ui.js" />
     <Content Include="Asserts\User\js\jquery.accordion.js" />
     <Content Include="Asserts\User\js\jquery.easing.js" />
     <Content Include="Asserts\User\js\jquery.min.js" />
@@ -309,6 +312,7 @@
     <Content Include="Asserts\User\js\move-top.js" />
     <Content Include="Asserts\User\js\popper.js" />
     <Content Include="Asserts\User\js\script.js" />
+    <Content Include="Asserts\User\js\SearchController.js" />
     <Content Include="Asserts\User\js\slides.min.jquery.js" />
     <Content Include="Asserts\User\js\startstop-slider.js" />
     <Content Include="Asserts\User\vendor\animate\animate.css" />
