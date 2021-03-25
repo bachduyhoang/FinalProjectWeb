@@ -92,7 +92,7 @@ namespace FinalProjectWeb.Controllers
                     Session["User"] = user;
                     if (user.roleID.Equals("ad"))
                     {
-                        return RedirectToAction("Index", "User", new { area = "Admin" });
+                        return RedirectToAction("Index", "Product", new { area = "Admin" });
                     }
                     else
                     {

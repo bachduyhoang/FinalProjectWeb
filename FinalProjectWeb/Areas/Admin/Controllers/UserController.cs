@@ -10,7 +10,7 @@ using FinalProjectWeb.Areas.Admin.Models;
 
 namespace FinalProjectWeb.Areas.Admin.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         // GET: Admin/User
         public ActionResult Index(string txtSearch, int page = 1, int size = 5)
