@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.EF;
+using PagedList;
 
 namespace DAL.DAL
 {
@@ -18,7 +19,17 @@ namespace DAL.DAL
             context = new DBContext();
         }
 
-        public List<User> GetListPagingByHand(string txtSearch, ref int totalPage, int index=1, int size = 20)
+        //public IEnumerable<User> GetListPaging(string txtSearch, int page, int size)
+        //{
+        //    IQueryable<User> model = context.Users;
+        //    if (!string.IsNullOrEmpty(txtSearch))
+        //    {
+        //        model = model.Where(x => x.fullName.Contains(txtSearch) && x.roleID != "ad");
+        //    }
+        //    return model.Where(x => x.roleID != "ad").OrderByDescending(x => x.dateCreated).ToPagedList(page, size);
+        //}
+
+        public List<User> GetListPagingByHand(string txtSearch, ref int totalPage, int index = 1, int size = 20)
         {
             List<User> list = new List<User>();
             if (string.IsNullOrEmpty(txtSearch))

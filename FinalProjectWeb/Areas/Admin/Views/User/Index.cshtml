@@ -1,5 +1,7 @@
-﻿@model PagedList.IPagedList<DAL.EF.User>
-@using PagedList.Mvc
+﻿@*@model PagedList.IPagedList<DAL.EF.User>
+@using PagedList.Mvc*@
+
+@model List<DAL.EF.User>
 
 @*@model FinalProjectWeb.Areas.Admin.Models.UserModel*@
 
@@ -39,7 +41,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach(var item in Model)
                         {
                             <tr id="row_@item.userID">
                                 <td>@item.userID</td>
@@ -96,8 +98,6 @@
                                 <li class="page-item"><a class="page-link" href="/Admin/User/Index?txtSearch=@ViewBag.Search&index=@ViewBag.Next">Next</a></li>
                                 <li class="page-item"><a class="page-link" href="/Admin/User/Index?txtSearch=@ViewBag.Search&index=@ViewBag.Last">Last</a></li>
                             }
-
-
                         </ul>
                     </nav>
                 }
